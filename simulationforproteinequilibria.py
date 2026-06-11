@@ -539,9 +539,6 @@ st.markdown(
     unsafe_allow_html=True,
 )
 
-# Section heading — shows the active equilibrium model
-st.markdown(f"<div class='section-heading'>{EQ_LABELS[model]}</div>", unsafe_allow_html=True)
-
 # Validate
 errors = []
 if c_min >= c_max:   errors.append("'C min' must be less than 'C max'.")
@@ -569,8 +566,14 @@ if run_btn or "last_result" not in st.session_state:
             st.error(f"Simulation error: {exc}")
             st.stop()
 
+if "last_result" not in st.session_state:
+    st.stop()
+
 res = st.session_state["last_result"]
 C, tau, species = res["C"], res["tau"], res["species"]
+
+# Section heading — sourced from last_result so it only appears after Run is pressed
+st.markdown(f"<div class='section-heading'>{EQ_LABELS[res['model']]}</div>", unsafe_allow_html=True)
 
 fig = make_figure(C, tau, species, res["model"])
 st.pyplot(fig, use_container_width=True)

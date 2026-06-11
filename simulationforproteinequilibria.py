@@ -20,26 +20,25 @@ st.set_page_config(
     layout="wide",
 )
 
-C_TAU    = "#000000"
 C_MONO   = "#0072b2"
 C_DIMER  = "#e69f00"
 C_TRIMER = "#cc79a7"
 C_TETRA  = "#009e73"
 
 PLOT_RC = {
-    "axes.facecolor":   "#ffffff",
-    "figure.facecolor": "#ffffff",
-    "axes.edgecolor":   "#cccccc",
-    "axes.labelcolor":  "#333333",
+    "axes.facecolor":   "#1a1a2e",
+    "figure.facecolor": "#1a1a2e",
+    "axes.edgecolor":   "#3a3a5c",
+    "axes.labelcolor":  "#cccccc",
     "axes.grid":        True,
-    "grid.color":       "#f0f0f0",
+    "grid.color":       "#2a2a4a",
     "grid.linestyle":   "--",
     "grid.linewidth":   0.5,
-    "xtick.color":      "#555555",
-    "ytick.color":      "#555555",
-    "text.color":       "#222222",
-    "legend.facecolor": "#ffffff",
-    "legend.edgecolor": "#eeeeee",
+    "xtick.color":      "#aaaaaa",
+    "ytick.color":      "#aaaaaa",
+    "text.color":       "#dddddd",
+    "legend.facecolor": "#16213e",
+    "legend.edgecolor": "#3a3a5c",
     "legend.fontsize":  9,
     "font.size":        10,
     "axes.titlesize":   11,
@@ -48,220 +47,267 @@ PLOT_RC = {
 
 st.markdown("""
 <style>
-/* ── Global light theme ── */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+/* ── Full dark theme ── */
 html, body,
 [data-testid="stAppViewContainer"],
-[data-testid="stApp"] {
-    background-color: #f8f8f6 !important;
-    color: #1a1a1a !important;
+[data-testid="stApp"],
+.main,
+.main .block-container {
+    background-color: #0f0f1a !important;
+    color: #e0e0e0 !important;
+    font-family: 'Inter', sans-serif !important;
+}
+.main .block-container {
+    padding-top: 2rem;
+    padding-bottom: 5rem;
+    max-width: 1100px;
 }
 
-/* ── Header: dark bg so icons always visible ── */
+/* ── Header bar ── */
 [data-testid="stHeader"],
 header[data-testid="stHeader"] {
-    background-color: #1e1e1e !important;
-    border-bottom: 1px solid #333 !important;
+    background-color: #0f0f1a !important;
+    border-bottom: 1px solid #2a2a3e !important;
 }
 [data-testid="stHeader"] *,
-[data-testid="stToolbarActions"],
-[data-testid="stToolbarActions"] *,
-[data-testid="stToolbarActions"] button,
-[data-testid="stToolbarActions"] a,
-[data-testid="stToolbarActions"] span {
+[data-testid="stToolbarActions"] * {
     color: #ffffff !important;
 }
 [data-testid="stHeader"] svg path,
 [data-testid="stHeader"] svg circle,
 [data-testid="stHeader"] svg rect,
+[data-testid="stHeader"] svg polygon,
 [data-testid="stToolbarActions"] svg path,
 [data-testid="stToolbarActions"] svg circle,
-[data-testid="stToolbarActions"] svg rect {
+[data-testid="stToolbarActions"] svg rect,
+[data-testid="stToolbarActions"] svg polygon {
     fill: #ffffff !important;
     stroke: none !important;
 }
-[data-testid="stToolbarActions"] button:hover svg path {
-    fill: #60b8f0 !important;
-}
-
-.main .block-container {
-    background-color: #f8f8f6 !important;
-    padding-top: 2.5rem;
-    padding-bottom: 3rem;
-    max-width: 960px;
+[data-testid="stToolbarActions"] button:hover svg path,
+[data-testid="stToolbarActions"] button:hover svg circle {
+    fill: #e040fb !important;
 }
 
 /* ── Sidebar ── */
 section[data-testid="stSidebar"] {
-    background-color: #1e1e1e !important;
-    border-right: 1px solid #333 !important;
+    background-color: #16162a !important;
+    border-right: 1px solid #2a2a3e !important;
+    padding-top: 1rem !important;
 }
 section[data-testid="stSidebar"] * {
-    color: #e8e8e8 !important;
+    color: #e0e0e0 !important;
+    font-family: 'Inter', sans-serif !important;
 }
 section[data-testid="stSidebar"] hr {
-    border-color: #3a3a3a !important;
-    margin: 14px 0 !important;
+    border-color: #2a2a3e !important;
+    margin: 18px 0 !important;
 }
-/* Removed gap override — it was collapsing all whitespace */
-section[data-testid="stSidebar"] .stMarkdown { margin-bottom: 4px !important; }
-
-/* Generous spacing between each input group */
-section[data-testid="stSidebar"] .stSelectbox  { margin-bottom: 14px !important; }
-section[data-testid="stSidebar"] .stNumberInput { margin-bottom: 14px !important; }
-section[data-testid="stSidebar"] .stSlider      { margin-bottom: 16px !important; }
-
-/* Sidebar section headers */
-.sidebar-section-label {
-    font-size: 0.68rem;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: #888888 !important;
-    font-weight: 600;
-    margin-bottom: 8px;
-    margin-top: 6px;
-    display: block;
+section[data-testid="stSidebar"] .stMarkdown {
+    margin-bottom: 6px !important;
 }
+section[data-testid="stSidebar"] .stSelectbox  { margin-bottom: 18px !important; }
+section[data-testid="stSidebar"] .stNumberInput { margin-bottom: 18px !important; }
+section[data-testid="stSidebar"] .stSlider      { margin-bottom: 22px !important; }
 
-/* Sidebar inputs on dark bg */
-section[data-testid="stSidebar"] input,
-section[data-testid="stSidebar"] textarea {
-    background-color: #2d2d2d !important;
-    color: #e8e8e8 !important;
-    border: 1px solid #444 !important;
-    border-radius: 5px !important;
+/* Sidebar inputs */
+section[data-testid="stSidebar"] input {
+    background-color: #1e1e35 !important;
+    color: #e0e0e0 !important;
+    border: 1px solid #3a3a5c !important;
+    border-radius: 6px !important;
 }
 section[data-testid="stSidebar"] [data-testid="stSelectbox"] > div > div {
-    background-color: #2d2d2d !important;
-    color: #e8e8e8 !important;
-    border: 1px solid #444 !important;
+    background-color: #1e1e35 !important;
+    color: #e0e0e0 !important;
+    border: 1px solid #3a3a5c !important;
+    border-radius: 6px !important;
 }
-/* Number input stepper buttons */
 section[data-testid="stSidebar"] [data-testid="stNumberInput"] button {
-    background-color: #3a3a3a !important;
+    background-color: #2a2a45 !important;
     border: none !important;
+    border-radius: 4px !important;
 }
-section[data-testid="stSidebar"] [data-testid="stNumberInput"] button *,
 section[data-testid="stSidebar"] [data-testid="stNumberInput"] button svg,
 section[data-testid="stSidebar"] [data-testid="stNumberInput"] button svg path {
-    color: #ffffff !important;
     fill: #ffffff !important;
 }
 section[data-testid="stSidebar"] [data-testid="stNumberInput"] button:hover {
-    background-color: #555 !important;
+    background-color: #e040fb !important;
 }
-/* Slider track labels */
-section[data-testid="stSidebar"] [data-testid="stSlider"] p,
-section[data-testid="stSidebar"] [data-testid="stSlider"] label,
-section[data-testid="stSidebar"] [data-testid="stSlider"] span {
-    color: #e8e8e8 !important;
+section[data-testid="stSidebar"] [data-testid="stSlider"] span,
+section[data-testid="stSidebar"] [data-testid="stSlider"] p {
+    color: #aaaaaa !important;
+}
+/* Slider accent color */
+section[data-testid="stSidebar"] [data-testid="stSlider"] [role="slider"] {
+    background-color: #e040fb !important;
 }
 
 /* ── Dropdown popup ── */
 [data-baseweb="popover"], [data-baseweb="popover"] *,
 [data-baseweb="menu"], [data-baseweb="menu"] *,
 li[role="option"], li[role="option"] * {
-    background-color: #2d2d2d !important;
-    color: #e8e8e8 !important;
+    background-color: #1e1e35 !important;
+    color: #e0e0e0 !important;
 }
 li[role="option"]:hover,
 li[role="option"][aria-selected="true"] {
-    background-color: #0072b2 !important;
+    background-color: #e040fb !important;
     color: #ffffff !important;
+}
+
+/* ── Sidebar section labels ── */
+.sidebar-label {
+    font-size: 0.65rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #7070a0 !important;
+    font-weight: 600;
+    margin-bottom: 10px;
+    margin-top: 2px;
+    display: block;
+}
+.sidebar-input-label {
+    font-size: 0.82rem;
+    color: #b0b0cc !important;
+    margin-bottom: 3px;
+    display: block;
 }
 
 /* ── Run button ── */
 div.stButton > button {
     width: 100%;
-    background-color: #0072b2 !important;
+    background-color: #e040fb !important;
     color: #ffffff !important;
     font-weight: 600;
-    border-radius: 6px;
-    padding: 0.55rem;
+    border-radius: 8px !important;
+    padding: 0.6rem !important;
     border: none !important;
     font-size: 0.9rem;
-    letter-spacing: 0.03em;
-    margin-top: 10px;
-    transition: background 0.15s;
+    letter-spacing: 0.04em;
+    margin-top: 4px;
+    transition: background 0.15s, transform 0.1s;
+    font-family: 'Inter', sans-serif !important;
 }
-div.stButton > button:hover  { background-color: #005a8e !important; }
-div.stButton > button:active { background-color: #004470 !important; }
+div.stButton > button:hover  {
+    background-color: #c020d0 !important;
+    transform: translateY(-1px);
+}
+div.stButton > button:active { background-color: #9900aa !important; }
 
 /* ── Download button ── */
 [data-testid="stDownloadButton"] > button {
     background-color: transparent !important;
-    color: #0072b2 !important;
+    color: #e040fb !important;
     font-weight: 500;
-    border: 1.5px solid #0072b2 !important;
-    border-radius: 6px;
-    padding: 0.4rem 1rem;
+    border: 1.5px solid #e040fb !important;
+    border-radius: 8px !important;
+    padding: 0.4rem 1.2rem;
     font-size: 0.85rem;
-    margin-top: 6px;
+    margin-top: 8px;
+    transition: all 0.15s;
 }
 [data-testid="stDownloadButton"] > button:hover {
-    background-color: #0072b2 !important;
+    background-color: #e040fb !important;
     color: #ffffff !important;
 }
 
-/* ── Page header: centered, refined typography ── */
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;500&display=swap');
-
+/* ── Page header ── */
 .page-header {
-    text-align: center;
     margin-bottom: 2rem;
-    padding: 1.5rem 0 1rem 0;
-    border-bottom: 1px solid #e8e8e4;
+    padding-bottom: 1.2rem;
+    border-bottom: 1px solid #2a2a3e;
+}
+.page-icon {
+    font-size: 2.2rem;
+    margin-right: 0.5rem;
+    vertical-align: middle;
 }
 .page-title {
-    font-family: 'Playfair Display', Georgia, serif;
+    font-family: 'Inter', sans-serif;
     font-size: 2rem;
     font-weight: 700;
-    color: #111111 !important;
+    color: #ffffff !important;
     letter-spacing: -0.02em;
-    line-height: 1.2;
-    margin-bottom: 6px;
-}
-.page-byline {
-    font-family: 'Inter', sans-serif;
-    font-size: 0.68rem;
-    color: #aaaaaa !important;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    font-weight: 500;
-    margin-bottom: 6px;
+    line-height: 1.15;
+    display: inline;
+    vertical-align: middle;
 }
 .page-subtitle {
     font-family: 'Inter', sans-serif;
     font-size: 0.9rem;
-    color: #888888 !important;
-    font-style: italic;
-    margin-bottom: 0;
+    color: #7070a0 !important;
+    margin-top: 6px;
     font-weight: 400;
-    letter-spacing: 0.01em;
 }
 
-/* ── Main area text ── */
+/* ── Section headings in main area ── */
+.section-heading {
+    font-family: 'Inter', sans-serif;
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #ffffff !important;
+    margin-top: 0.5rem;
+    margin-bottom: 1.2rem;
+    padding-bottom: 0.4rem;
+    border-bottom: 1px solid #2a2a3e;
+}
+
+/* ── All text in main area ── */
 p, span, label, div, h1, h2, h3, h4, h5, h6,
-.stMarkdown, .stCaption,
-[data-testid="stMarkdownContainer"] {
-    color: #1a1a1a !important;
+.stMarkdown, [data-testid="stMarkdownContainer"] {
+    color: #e0e0e0 !important;
 }
 
-/* Hide the docstring from showing up */
-[data-testid="stText"] { display: none; }
+/* ── Profile avatar — fixed bottom-right ── */
+.profile-avatar {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background-color: #2a2a45;
+    border: 2px solid #e040fb;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    cursor: pointer;
+    box-shadow: 0 2px 12px rgba(224, 64, 251, 0.35);
+    transition: box-shadow 0.2s, transform 0.2s;
+}
+.profile-avatar:hover {
+    box-shadow: 0 4px 20px rgba(224, 64, 251, 0.6);
+    transform: scale(1.08);
+}
+.profile-avatar svg {
+    width: 26px;
+    height: 26px;
+}
 
 /* ── Spinner ── */
-[data-testid="stSpinner"] * { color: #0072b2 !important; }
+[data-testid="stSpinner"] * { color: #e040fb !important; }
 
-/* ── Plot container spacing ── */
-[data-testid="stImage"], .stPyplot {
-    margin-top: 0.5rem;
-    margin-bottom: 0.75rem;
-}
+/* Hide docstring */
+[data-testid="stText"] { display: none; }
 </style>
+
+<!-- Fixed profile avatar bottom-right -->
+<div class="profile-avatar" title="Profile">
+  <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="12" cy="8" r="4" fill="#e0e0e0"/>
+    <path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" stroke="#e0e0e0" stroke-width="1.8"
+          stroke-linecap="round" fill="none"/>
+  </svg>
+</div>
 """, unsafe_allow_html=True)
 
 
-# ── Physics ────────────────────────────────────────────────────────────────────
+# ── Physics ─────────────────────────────────────────────────────────────────────
 def dimer_equilibria(C2, KD, f, C_l):
     C = 2 * C2
     r2 = 0.79
@@ -331,16 +377,16 @@ def run_simulation(model, KD, f, C_l, c_min, c_max, KD2=None, N=200):
 
 def make_figure(C, tau, species, model):
     species_colors = {
-        "Monomer":  C_MONO,
-        "Dimer":    C_DIMER,
-        "Trimer":   C_TRIMER,
-        "Tetramer": C_TETRA,
+        "Monomer":  "#7eb8f7",
+        "Dimer":    "#f5c842",
+        "Trimer":   "#e085c8",
+        "Tetramer": "#50d9a0",
     }
     n_map = {"Dimer": 2, "Trimer": 3, "Tetramer": 4}
     n = n_map[model]
 
     with plt.rc_context(PLOT_RC):
-        fig = plt.figure(figsize=(8.5, 6.5), facecolor="#ffffff")
+        fig = plt.figure(figsize=(8.5, 6.5), facecolor="#1a1a2e")
         gs = fig.add_gridspec(
             2, 1, height_ratios=[1.15, 1],
             hspace=0.58, top=0.88, bottom=0.10, left=0.11, right=0.96,
@@ -349,24 +395,25 @@ def make_figure(C, tau, species, model):
         ax_frac = fig.add_subplot(gs[1])
 
         def style_ax(ax):
-            ax.set_facecolor("#ffffff")
+            ax.set_facecolor("#1a1a2e")
             ax.tick_params(labelsize=9)
             for sp in ax.spines.values():
-                sp.set_color("#dddddd")
+                sp.set_color("#3a3a5c")
                 sp.set_linewidth(0.8)
-            ax.grid(True, color="#f2f2f2", linewidth=0.6, linestyle="--")
+            ax.grid(True, color="#252540", linewidth=0.6, linestyle="--")
 
         # tau panel
         style_ax(ax_tau)
-        ax_tau.plot(C, tau, color="#111111", linewidth=2.0, solid_capstyle="round")
+        ax_tau.plot(C, tau, color="#e040fb", linewidth=2.2, solid_capstyle="round")
         ax_tau.set_xscale("log")
         ax_tau.set_xlim(C[0], C[-1])
-        ax_tau.set_xlabel("Protein Concentration (nM)", color="#555", fontsize=9, labelpad=4)
-        ax_tau.tick_params(axis="x", colors="#555", labelsize=8)
+        ax_tau.set_xlabel("Protein Concentration (nM)", color="#8888aa", fontsize=9, labelpad=4)
+        ax_tau.tick_params(axis="x", colors="#8888aa", labelsize=8)
         ax_tau.xaxis.set_major_formatter(ticker.FuncFormatter(lambda v, _: f"{v:g}"))
-        ax_tau.set_ylabel(r"$\tau_\mathrm{app}\ /\ \tau_\mathrm{D}$", fontsize=9, labelpad=6)
+        ax_tau.set_ylabel(r"$\tau_\mathrm{app}\ /\ \tau_\mathrm{D}$", fontsize=9, labelpad=6, color="#cccccc")
         tau_lo = max(0.0, tau.min() - 0.05)
         ax_tau.set_ylim(tau_lo, 1.05)
+        ax_tau.tick_params(axis="y", colors="#8888aa", labelsize=8)
 
         # twin top axis
         ax2x = ax_tau.twiny()
@@ -377,34 +424,34 @@ def make_figure(C, tau, species, model):
         base_ticks = [10**e for e in range(log_lo, log_hi + 1) if C[0] <= 10**e <= C[-1]]
         ax2x.set_xticks(base_ticks)
         ax2x.set_xticklabels([f"{v * n:g}" for v in base_ticks])
-        ax2x.set_xlabel(r"$C_0$ (total monomer, nM)", color="#aa6699", fontsize=8.5, labelpad=4)
-        ax2x.tick_params(axis="x", colors="#aa6699", labelsize=8)
-        ax2x.spines["top"].set_color("#aa6699")
+        ax2x.set_xlabel(r"$C_0$ (total monomer, nM)", color="#c080e0", fontsize=8.5, labelpad=4)
+        ax2x.tick_params(axis="x", colors="#c080e0", labelsize=8)
+        ax2x.spines["top"].set_color("#c080e0")
         ax2x.spines["top"].set_linewidth(1.0)
         for sp_name in ("bottom", "left", "right"):
-            ax2x.spines[sp_name].set_color("#dddddd")
-            ax2x.spines[sp_name].set_linewidth(0.8)
+            ax2x.spines[sp_name].set_color("#3a3a5c")
 
         # fraction panel
         style_ax(ax_frac)
         for name, frac in species.items():
-            ax_frac.plot(C, frac, color=species_colors.get(name, "#444"),
-                         linewidth=1.8, label=name, solid_capstyle="round")
+            ax_frac.plot(C, frac, color=species_colors.get(name, "#aaaaaa"),
+                         linewidth=2.0, label=name, solid_capstyle="round")
         ax_frac.set_xscale("log")
         ax_frac.set_xlim(C[0], C[-1])
-        ax_frac.set_xlabel("Protein Concentration (nM)", fontsize=9, labelpad=4, color="#555")
-        ax_frac.tick_params(axis="x", labelsize=8, colors="#555")
+        ax_frac.set_xlabel("Protein Concentration (nM)", fontsize=9, labelpad=4, color="#8888aa")
+        ax_frac.tick_params(axis="x", labelsize=8, colors="#8888aa")
+        ax_frac.tick_params(axis="y", labelsize=8, colors="#8888aa")
         ax_frac.xaxis.set_major_formatter(ticker.FuncFormatter(lambda v, _: f"{v:g}"))
-        ax_frac.set_ylabel("Fractional concentration  α", fontsize=9, labelpad=6)
+        ax_frac.set_ylabel("Fractional concentration  α", fontsize=9, labelpad=6, color="#cccccc")
         ax_frac.set_ylim(-0.02, 1.05)
         ax_frac.set_yticks([0, 0.25, 0.5, 0.75, 1.0])
-        ax_frac.legend(loc="center right", framealpha=0.9, fontsize=9,
-                       edgecolor="#eeeeee")
+        ax_frac.legend(loc="center right", framealpha=0.85, fontsize=9,
+                       edgecolor="#3a3a5c", labelcolor="#dddddd")
 
     return fig
 
 
-# ── Sidebar ────────────────────────────────────────────────────────────────────
+# ── Sidebar ──────────────────────────────────────────────────────────────────────
 EQ_LABELS = {
     "Dimer":    "Dimer ⇌ Monomer",
     "Trimer":   "Trimer ⇌ Monomer",
@@ -413,111 +460,89 @@ EQ_LABELS = {
 
 with st.sidebar:
     st.markdown(
-        "<div style='font-size:1.05rem; font-weight:700; color:#ffffff !important;"
-        " letter-spacing:-0.01em; padding: 8px 0 3px 0;'>FCS Simulator</div>"
-        "<div style='font-size:0.72rem; color:#999 !important; margin-bottom:10px;'>"
+        "<div style='font-size:1.1rem; font-weight:700; color:#ffffff !important;"
+        " letter-spacing:-0.01em; padding:6px 0 2px 0; font-family:Inter,sans-serif;'>"
+        "🔬 FCS Simulator</div>"
+        "<div style='font-size:0.72rem; color:#7070a0 !important; margin-bottom:4px;"
+        " letter-spacing:0.05em; font-family:Inter,sans-serif;'>"
         "Oligomerization equilibria</div>",
         unsafe_allow_html=True,
     )
     st.divider()
 
-    st.markdown("<span class='sidebar-section-label'>Equilibrium model</span>",
-                unsafe_allow_html=True)
-    model_label = st.selectbox(
-        "model", list(EQ_LABELS.values()), label_visibility="collapsed"
-    )
+    st.markdown("<span class='sidebar-label'>Equilibrium Model</span>", unsafe_allow_html=True)
+    model_label = st.selectbox("model", list(EQ_LABELS.values()), label_visibility="collapsed")
     model = [k for k, v in EQ_LABELS.items() if v == model_label][0]
 
     st.divider()
-    st.markdown("<span class='sidebar-section-label'>Model parameters</span>",
-                unsafe_allow_html=True)
+    st.markdown("<span class='sidebar-label'>Model Parameters</span>", unsafe_allow_html=True)
 
     if model == "Tetramer":
-        # Use HTML labels with proper subscripts via markdown
         st.markdown(
-            "<div style='font-size:0.85rem; color:#cccccc !important; margin-bottom:2px;'>"
-            "K<sub>d1</sub> — dimer→tetramer (nM)</div>",
+            "<span class='sidebar-input-label'>K<sub>d1</sub> — dimer→tetramer (nM)</span>",
             unsafe_allow_html=True,
         )
-        KD1 = st.number_input(
-            "Kd1", label_visibility="collapsed",
-            min_value=1e-6, max_value=1e9, value=100.0, step=10.0, format="%.4g"
-        )
+        KD1 = st.number_input("Kd1", label_visibility="collapsed",
+                               min_value=1e-6, max_value=1e9, value=100.0, step=10.0, format="%.4g")
         st.markdown(
-            "<div style='font-size:0.85rem; color:#cccccc !important; margin-bottom:2px;'>"
-            "K<sub>d2</sub> — monomer→dimer (nM)</div>",
+            "<span class='sidebar-input-label'>K<sub>d2</sub> — monomer→dimer (nM)</span>",
             unsafe_allow_html=True,
         )
-        KD2 = st.number_input(
-            "Kd2", label_visibility="collapsed",
-            min_value=1e-6, max_value=1e9, value=500.0, step=10.0, format="%.4g"
-        )
+        KD2 = st.number_input("Kd2", label_visibility="collapsed",
+                               min_value=1e-6, max_value=1e9, value=500.0, step=10.0, format="%.4g")
     else:
         st.markdown(
-            "<div style='font-size:0.85rem; color:#cccccc !important; margin-bottom:2px;'>"
-            "K<sub>d</sub> (nM)</div>",
+            "<span class='sidebar-input-label'>K<sub>d</sub> (nM)</span>",
             unsafe_allow_html=True,
         )
-        KD1 = st.number_input(
-            "Kd", label_visibility="collapsed",
-            min_value=1e-6, max_value=1e9, value=100.0, step=10.0, format="%.4g"
-        )
+        KD1 = st.number_input("Kd", label_visibility="collapsed",
+                               min_value=1e-6, max_value=1e9, value=100.0, step=10.0, format="%.4g")
         KD2 = None
 
     f = st.slider("Labelling efficiency  f", 0.0, 1.0, 0.5, 0.01)
 
     st.markdown(
-        "<div style='font-size:0.85rem; color:#cccccc !important; margin-bottom:2px;'>"
-        "Labeled concentration C<sub>L</sub> (nM)</div>",
+        "<span class='sidebar-input-label'>Labeled concentration C<sub>L</sub> (nM)</span>",
         unsafe_allow_html=True,
     )
-    C_l = st.number_input(
-        "CL", label_visibility="collapsed",
-        min_value=0.0, max_value=1e6, value=1.0, step=0.1, format="%.4g"
-    )
+    C_l = st.number_input("CL", label_visibility="collapsed",
+                           min_value=0.0, max_value=1e6, value=1.0, step=0.1, format="%.4g")
 
     st.divider()
-    st.markdown("<span class='sidebar-section-label'>Protein concentration range (nM)</span>",
+    st.markdown("<span class='sidebar-label'>Protein Concentration Range (nM)</span>",
                 unsafe_allow_html=True)
     col_lo, col_hi = st.columns(2)
     with col_lo:
-        st.markdown(
-            "<div style='font-size:0.78rem; color:#aaaaaa !important; margin-bottom:1px;'>Min</div>",
-            unsafe_allow_html=True,
-        )
-        c_min = st.number_input(
-            "Min", label_visibility="collapsed",
-            min_value=1e-6, max_value=1e6, value=1.0, step=1.0, format="%.4g"
-        )
+        st.markdown("<span class='sidebar-input-label'>Min</span>", unsafe_allow_html=True)
+        c_min = st.number_input("Min", label_visibility="collapsed",
+                                 min_value=1e-6, max_value=1e6, value=1.0, step=1.0, format="%.4g")
     with col_hi:
-        st.markdown(
-            "<div style='font-size:0.78rem; color:#aaaaaa !important; margin-bottom:1px;'>Max</div>",
-            unsafe_allow_html=True,
-        )
-        c_max = st.number_input(
-            "Max", label_visibility="collapsed",
-            min_value=1e-6, max_value=1e9, value=1000.0, step=100.0, format="%.4g"
-        )
+        st.markdown("<span class='sidebar-input-label'>Max</span>", unsafe_allow_html=True)
+        c_max = st.number_input("Max", label_visibility="collapsed",
+                                 min_value=1e-6, max_value=1e9, value=1000.0, step=100.0, format="%.4g")
 
     st.divider()
-    run_btn = st.button("▶  Run simulation", use_container_width=True)
+    run_btn = st.button("▶  Run Simulation", use_container_width=True)
 
 
-# ── Main area ──────────────────────────────────────────────────────────────────
+# ── Main area ─────────────────────────────────────────────────────────────────────
 EQ_SUBTITLES = {
-    "Dimer":    "Dimer ⇌ Monomer equilibrium",
-    "Trimer":   "Trimer ⇌ Monomer equilibrium",
-    "Tetramer": "Tetramer ⇌ Dimer ⇌ Monomer equilibrium",
+    "Dimer":    "Interactive simulation of dimer ⇌ monomer equilibrium by FCS",
+    "Trimer":   "Interactive simulation of trimer ⇌ monomer equilibrium by FCS",
+    "Tetramer": "Interactive simulation of tetramer ⇌ dimer ⇌ monomer equilibrium by FCS",
 }
 
 st.markdown(
     "<div class='page-header'>"
-    "<div class='page-title'>Protein Oligomerization Equilibria</div>"
-    "<div class='page-byline'>by Fluorescence Correlation Spectroscopy</div>"
+    "<span class='page-icon'>🔬</span>"
+    "<span class='page-title'>FCS Oligomerization Simulator</span>"
     f"<div class='page-subtitle'>{EQ_SUBTITLES.get(model, '')}</div>"
     "</div>",
     unsafe_allow_html=True,
 )
+
+# Section heading
+st.markdown("<div class='section-heading'>Simulation Output</div>", unsafe_allow_html=True)
 
 # Validate
 errors = []
@@ -527,8 +552,7 @@ if KD1   <= 0:       errors.append("Kd must be > 0.")
 if model == "Tetramer" and KD2 <= 0:
     errors.append("Kd2 must be > 0.")
 if errors:
-    for e in errors:
-        st.error(e)
+    for e in errors: st.error(e)
     st.stop()
 
 # Run
@@ -550,7 +574,6 @@ if run_btn or "last_result" not in st.session_state:
 res = st.session_state["last_result"]
 C, tau, species = res["C"], res["tau"], res["species"]
 
-# Plot
 fig = make_figure(C, tau, species, res["model"])
 st.pyplot(fig, use_container_width=True)
 plt.close(fig)
@@ -561,7 +584,7 @@ df_data.update(species)
 df = pd.DataFrame(df_data)
 csv = df.to_csv(index=False).encode("utf-8")
 st.download_button(
-    label="⬇  Download data as CSV",
+    label="⬇  Download CSV",
     data=csv,
     file_name=f"fcs_{res['model'].lower()}_simulation.csv",
     mime="text/csv",

@@ -132,7 +132,7 @@ section[data-testid="stSidebar"] .stMarkdown {
 }
 section[data-testid="stSidebar"] .stSelectbox  { margin-bottom: 18px !important; }
 section[data-testid="stSidebar"] .stNumberInput { margin-bottom: 18px !important; }
-section[data-testid="stSidebar"] .stSlider      { margin-bottom: 22px !important; }
+
 
 /* Sidebar inputs */
 section[data-testid="stSidebar"] input {
@@ -159,18 +159,7 @@ section[data-testid="stSidebar"] [data-testid="stNumberInput"] button svg path {
 section[data-testid="stSidebar"] [data-testid="stNumberInput"] button:hover {
     background-color: #e040fb !important;
 }
-section[data-testid="stSidebar"] [data-testid="stSlider"] p {
-    color: #aaaaaa !important;
-}
-/* Kill ALL spans inside slider — prevents Material Icons glyph showing as text */
-section[data-testid="stSidebar"] [data-testid="stSlider"] span {
-    font-size: 0 !important;
-    color: transparent !important;
-    line-height: 0 !important;
-    overflow: hidden !important;
-    display: inline-block !important;
-    width: auto !important;
-}
+
 
 /* ── Dropdown popup ── */
 [data-baseweb="popover"], [data-baseweb="popover"] *,
@@ -490,7 +479,12 @@ with st.sidebar:
                                min_value=1e-6, max_value=1e9, value=100.0, step=10.0, format="%.4g")
         KD2 = None
 
-    f = st.slider("Labelling efficiency  f", 0.0, 1.0, 0.5, 0.01)
+    st.markdown(
+        "<span class='sidebar-input-label'>Labelling efficiency f (0–1)</span>",
+        unsafe_allow_html=True,
+    )
+    f = st.number_input("f", label_visibility="collapsed",
+                        min_value=0.0, max_value=1.0, value=0.5, step=0.05, format="%.2f")
 
     st.markdown(
         "<span class='sidebar-input-label'>Labeled concentration C<sub>L</sub> (nM)</span>",

@@ -4,7 +4,6 @@ Created on Wed Jun 10 11:27:19 2026
 
 @author: Dhanashri
 """
-
 """
 FCS Oligomerization Simulator — Streamlit version
 Simulates apparent diffusion time (tau_app) and fractional species concentrations
@@ -90,6 +89,32 @@ st.markdown("""
     [data-testid="stSelectbox"] > div > div,
     [data-testid="stNumberInput"] input {
         background-color: #ffffff !important;
+        color: #1a1a1a !important;
+    }
+    /* Dropdown popup list */
+    [data-baseweb="popover"],
+    [data-baseweb="popover"] *,
+    [data-baseweb="menu"],
+    [data-baseweb="menu"] *,
+    li[role="option"],
+    li[role="option"] * {
+        background-color: #ffffff !important;
+        color: #1a1a1a !important;
+    }
+    li[role="option"]:hover,
+    li[role="option"][aria-selected="true"] {
+        background-color: #e8f0fb !important;
+        color: #0072b2 !important;
+    }
+    /* Data table */
+    [data-testid="stDataFrame"],
+    [data-testid="stDataFrame"] * {
+        background-color: #ffffff !important;
+        color: #1a1a1a !important;
+    }
+    /* Expander header */
+    [data-testid="stExpander"] summary,
+    [data-testid="stExpander"] summary * {
         color: #1a1a1a !important;
     }
     /* Slider */

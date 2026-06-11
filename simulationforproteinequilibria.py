@@ -141,10 +141,6 @@ section[data-testid="stSidebar"] [data-testid="stSlider"] span,
 section[data-testid="stSidebar"] [data-testid="stSlider"] p {
     color: #aaaaaa !important;
 }
-/* Slider accent color */
-section[data-testid="stSidebar"] [data-testid="stSlider"] [role="slider"] {
-    background-color: #e040fb !important;
-}
 
 /* ── Dropdown popup ── */
 [data-baseweb="popover"], [data-baseweb="popover"] *,
@@ -262,33 +258,6 @@ p, span, label, div, h1, h2, h3, h4, h5, h6,
     color: #e0e0e0 !important;
 }
 
-/* ── Profile avatar — fixed bottom-right ── */
-.profile-avatar {
-    position: fixed;
-    bottom: 24px;
-    right: 24px;
-    width: 48px;
-    height: 48px;
-    border-radius: 50%;
-    background-color: #2a2a45;
-    border: 2px solid #e040fb;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 9999;
-    cursor: pointer;
-    box-shadow: 0 2px 12px rgba(224, 64, 251, 0.35);
-    transition: box-shadow 0.2s, transform 0.2s;
-}
-.profile-avatar:hover {
-    box-shadow: 0 4px 20px rgba(224, 64, 251, 0.6);
-    transform: scale(1.08);
-}
-.profile-avatar svg {
-    width: 26px;
-    height: 26px;
-}
-
 /* ── Spinner ── */
 [data-testid="stSpinner"] * { color: #e040fb !important; }
 
@@ -296,14 +265,6 @@ p, span, label, div, h1, h2, h3, h4, h5, h6,
 [data-testid="stText"] { display: none; }
 </style>
 
-<!-- Fixed profile avatar bottom-right -->
-<div class="profile-avatar" title="Profile">
-  <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <circle cx="12" cy="8" r="4" fill="#e0e0e0"/>
-    <path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" stroke="#e0e0e0" stroke-width="1.8"
-          stroke-linecap="round" fill="none"/>
-  </svg>
-</div>
 """, unsafe_allow_html=True)
 
 

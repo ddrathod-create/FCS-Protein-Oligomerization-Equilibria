@@ -90,6 +90,17 @@ header[data-testid="stHeader"] {
 [data-testid="stToolbarActions"] button:hover svg circle {
     fill: #e040fb !important;
 }
+/* Hide print / theme-toggle / settings buttons from toolbar */
+[data-testid="stToolbarActions"] button[aria-label="Print app"],
+[data-testid="stToolbarActions"] button[aria-label="Toggle theme"],
+[data-testid="stToolbarActions"] button[aria-label="Open settings"],
+[data-testid="stToolbarActions"] button[title="Print app"],
+[data-testid="stToolbarActions"] button[title="Toggle theme"],
+[data-testid="stToolbarActions"] button[title="Settings"],
+[data-testid="stToolbarActions"] button[title="Print"],
+[data-testid="stToolbarActions"] button[data-testid="baseButton-headerNoPadding"]:not(:last-child):not(:nth-last-child(2)) {
+    display: none !important;
+}
 
 /* ── Sidebar ── */
 section[data-testid="stSidebar"] {
@@ -137,9 +148,20 @@ section[data-testid="stSidebar"] [data-testid="stNumberInput"] button svg path {
 section[data-testid="stSidebar"] [data-testid="stNumberInput"] button:hover {
     background-color: #e040fb !important;
 }
-section[data-testid="stSidebar"] [data-testid="stSlider"] span,
 section[data-testid="stSidebar"] [data-testid="stSlider"] p {
     color: #aaaaaa !important;
+}
+/* Hide the Material Icons glyph Streamlit injects into the slider thumb */
+section[data-testid="stSidebar"] [data-testid="stSlider"] span[data-testid="stTickBarMin"],
+section[data-testid="stSidebar"] [data-testid="stSlider"] span[data-testid="stTickBarMax"] {
+    color: #aaaaaa !important;
+}
+section[data-testid="stSidebar"] [data-testid="stSlider"] [role="slider"] span,
+section[data-testid="stSidebar"] [data-testid="stSlider"] div[class*="thumb"] span,
+section[data-testid="stSidebar"] [data-testid="stSlider"] [class*="StyledThumb"] span {
+    font-size: 0 !important;
+    color: transparent !important;
+    visibility: hidden !important;
 }
 
 /* ── Dropdown popup ── */

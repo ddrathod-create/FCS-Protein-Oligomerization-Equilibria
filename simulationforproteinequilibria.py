@@ -56,27 +56,31 @@ html, body,
     color: #1a1a1a !important;
 }
 
-/* Fix header + top-right toolbar icons (Share, ⋮) */
+/* ── Header: dark bg so icons always visible ── */
 [data-testid="stHeader"],
 header[data-testid="stHeader"] {
-    background-color: #f8f8f6 !important;
-    border-bottom: 1px solid #e0e0e0 !important;
+    background-color: #1e1e1e !important;
+    border-bottom: 1px solid #333 !important;
 }
-/* Toolbar sits outside stHeader in some Streamlit versions */
+[data-testid="stHeader"] *,
 [data-testid="stToolbarActions"],
+[data-testid="stToolbarActions"] *,
 [data-testid="stToolbarActions"] button,
 [data-testid="stToolbarActions"] a,
-[data-testid="stToolbarActions"] svg,
+[data-testid="stToolbarActions"] span {
+    color: #ffffff !important;
+}
+[data-testid="stHeader"] svg path,
+[data-testid="stHeader"] svg circle,
+[data-testid="stHeader"] svg rect,
 [data-testid="stToolbarActions"] svg path,
 [data-testid="stToolbarActions"] svg circle,
 [data-testid="stToolbarActions"] svg rect {
-    color: #222222 !important;
-    fill: #222222 !important;
+    fill: #ffffff !important;
     stroke: none !important;
 }
-[data-testid="stToolbarActions"] button:hover svg path,
-[data-testid="stToolbarActions"] button:hover svg circle {
-    fill: #0072b2 !important;
+[data-testid="stToolbarActions"] button:hover svg path {
+    fill: #60b8f0 !important;
 }
 
 .main .block-container {
@@ -198,32 +202,41 @@ div.stButton > button:active { background-color: #004470 !important; }
     color: #ffffff !important;
 }
 
-/* ── Page header ── */
+/* ── Page header: centered, refined typography ── */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;500&display=swap');
+
 .page-header {
-    margin-bottom: 1.6rem;
+    text-align: center;
+    margin-bottom: 2rem;
+    padding: 1.5rem 0 1rem 0;
+    border-bottom: 1px solid #e8e8e4;
 }
 .page-title {
-    font-size: 1.55rem;
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 2rem;
     font-weight: 700;
     color: #111111 !important;
-    letter-spacing: -0.01em;
-    line-height: 1.25;
-    margin-bottom: 4px;
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+    margin-bottom: 6px;
 }
 .page-byline {
-    font-size: 0.72rem;
-    color: #999999 !important;
-    letter-spacing: 0.07em;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.68rem;
+    color: #aaaaaa !important;
+    letter-spacing: 0.12em;
     text-transform: uppercase;
     font-weight: 500;
-    margin-bottom: 4px;
+    margin-bottom: 6px;
 }
 .page-subtitle {
-    font-size: 0.92rem;
-    color: #777777 !important;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.9rem;
+    color: #888888 !important;
     font-style: italic;
     margin-bottom: 0;
     font-weight: 400;
+    letter-spacing: 0.01em;
 }
 
 /* ── Main area text ── */

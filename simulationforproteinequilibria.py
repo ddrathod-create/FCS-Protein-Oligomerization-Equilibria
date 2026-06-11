@@ -90,16 +90,40 @@ header[data-testid="stHeader"] {
 [data-testid="stToolbarActions"] button:hover svg circle {
     fill: #e040fb !important;
 }
-/* Hide deploy button (white square) and unwanted toolbar buttons */
+
+/* ── Hide sidebar collapse toggle (fixes "keyboard_double" text leak) ── */
+[data-testid="stSidebarCollapsedControl"],
+[data-testid="stSidebarCollapseButton"],
+[data-testid="collapsedControl"],
+button[data-testid="stSidebarCollapsedControl"],
+button[aria-label*="sidebar"],
+button[aria-label*="Sidebar"],
+button[aria-label*="Close sidebar"],
+button[aria-label*="Open sidebar"],
+button[aria-label*="collapse"],
+button[aria-label*="Collapse"] {
+    display: none !important;
+    visibility: hidden !important;
+    width: 0 !important;
+    height: 0 !important;
+    overflow: hidden !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    border: none !important;
+}
+
+/* ── Hide deploy button (white square) and unwanted toolbar buttons ── */
 [data-testid="stAppDeployButton"],
 [data-testid="stAppDeployButton"] *,
+[data-testid="stDeployButton"],
 [data-testid="stToolbarActions"] button[aria-label="Print app"],
 [data-testid="stToolbarActions"] button[aria-label="Toggle theme"],
 [data-testid="stToolbarActions"] button[aria-label="Open settings"],
 [data-testid="stToolbarActions"] button[title="Print app"],
 [data-testid="stToolbarActions"] button[title="Toggle theme"],
 [data-testid="stToolbarActions"] button[title="Settings"],
-[data-testid="stToolbarActions"] button[title="Print"] {
+[data-testid="stToolbarActions"] button[title="Print"],
+[data-testid="stToolbarActions"] button:last-child {
     display: none !important;
     visibility: hidden !important;
     width: 0 !important;

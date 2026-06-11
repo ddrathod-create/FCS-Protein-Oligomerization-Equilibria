@@ -47,7 +47,7 @@ PLOT_RC = {
 
 st.markdown("""
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,500;0,8..60,600;0,8..60,700;1,8..60,400&display=swap');
 
 /* ── Full dark theme ── */
 html, body,
@@ -57,7 +57,7 @@ html, body,
 .main .block-container {
     background-color: #0f0f1a !important;
     color: #e0e0e0 !important;
-    font-family: 'Inter', sans-serif !important;
+    font-family: 'Source Serif 4', serif !important;
 }
 .main .block-container {
     padding-top: 2rem;
@@ -135,10 +135,10 @@ section[data-testid="stSidebar"] {
 }
 section[data-testid="stSidebar"] *:not(span) {
     color: #e0e0e0 !important;
-    font-family: 'Inter', sans-serif !important;
+    font-family: 'Source Serif 4', serif !important;
 }
 section[data-testid="stSidebar"] span {
-    font-family: 'Inter', sans-serif !important;
+    font-family: 'Source Serif 4', serif !important;
 }
 section[data-testid="stSidebar"] hr {
     border-color: #2a2a3e !important;
@@ -193,20 +193,22 @@ li[role="option"][aria-selected="true"] {
 
 /* ── Sidebar section labels ── */
 .sidebar-label {
-    font-size: 0.65rem;
+    font-size: 0.8rem;
     letter-spacing: 0.12em;
     text-transform: uppercase;
     color: #7070a0 !important;
-    font-weight: 600;
+    font-weight: 700;
     margin-bottom: 10px;
     margin-top: 2px;
     display: block;
+    font-family: 'Source Serif 4', serif !important;
 }
 .sidebar-input-label {
-    font-size: 0.82rem;
+    font-size: 0.72rem;
     color: #b0b0cc !important;
     margin-bottom: 3px;
     display: block;
+    font-family: 'Source Serif 4', serif !important;
 }
 
 /* ── Run button ── */
@@ -222,7 +224,7 @@ div.stButton > button {
     letter-spacing: 0.04em;
     margin-top: 4px;
     transition: background 0.15s, transform 0.1s;
-    font-family: 'Inter', sans-serif !important;
+    font-family: 'Source Serif 4', serif !important;
 }
 div.stButton > button:hover  {
     background-color: #c020d0 !important;
@@ -259,7 +261,7 @@ div.stButton > button:active { background-color: #9900aa !important; }
     vertical-align: middle;
 }
 .page-title {
-    font-family: 'Inter', sans-serif;
+    font-family: 'Source Serif 4', serif;
     font-size: 2rem;
     font-weight: 700;
     color: #ffffff !important;
@@ -269,7 +271,7 @@ div.stButton > button:active { background-color: #9900aa !important; }
     vertical-align: middle;
 }
 .page-subtitle {
-    font-family: 'Inter', sans-serif;
+    font-family: 'Source Serif 4', serif;
     font-size: 0.9rem;
     color: #7070a0 !important;
     margin-top: 6px;
@@ -278,7 +280,7 @@ div.stButton > button:active { background-color: #9900aa !important; }
 
 /* ── Section headings in main area ── */
 .section-heading {
-    font-family: 'Inter', sans-serif;
+    font-family: 'Source Serif 4', serif;
     font-size: 1.25rem;
     font-weight: 600;
     color: #ffffff !important;
@@ -286,6 +288,7 @@ div.stButton > button:active { background-color: #9900aa !important; }
     margin-bottom: 1.2rem;
     padding-bottom: 0.4rem;
     border-bottom: 1px solid #2a2a3e;
+    text-align: center;
 }
 
 /* ── All text in main area ── */
@@ -458,10 +461,10 @@ EQ_LABELS = {
 with st.sidebar:
     st.markdown(
         "<div style='font-size:1.1rem; font-weight:700; color:#ffffff !important;"
-        " letter-spacing:-0.01em; padding:6px 0 2px 0; font-family:Inter,sans-serif;'>"
+        " letter-spacing:-0.01em; padding:6px 0 2px 0; font-family:\"Source Serif 4\",serif;'>"
         "🔬 FCS Simulator</div>"
         "<div style='font-size:0.72rem; color:#7070a0 !important; margin-bottom:4px;"
-        " letter-spacing:0.05em; font-family:Inter,sans-serif;'>"
+        " letter-spacing:0.05em; font-family:\"Source Serif 4\",serif;'>"
         "Oligomerization equilibria</div>",
         unsafe_allow_html=True,
     )

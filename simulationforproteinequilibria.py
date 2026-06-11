@@ -71,8 +71,8 @@ header[data-testid="stHeader"] {
     background-color: #0f0f1a !important;
     border-bottom: 1px solid #2a2a3e !important;
 }
-[data-testid="stHeader"] *,
-[data-testid="stToolbarActions"] * {
+[data-testid="stHeader"] *:not(span),
+[data-testid="stToolbarActions"] *:not(span) {
     color: #ffffff !important;
 }
 [data-testid="stHeader"] svg path,
@@ -92,6 +92,7 @@ header[data-testid="stHeader"] {
 }
 /* Hide deploy button (white square) and unwanted toolbar buttons */
 [data-testid="stAppDeployButton"],
+[data-testid="stAppDeployButton"] *,
 [data-testid="stToolbarActions"] button[aria-label="Print app"],
 [data-testid="stToolbarActions"] button[aria-label="Toggle theme"],
 [data-testid="stToolbarActions"] button[aria-label="Open settings"],
@@ -100,6 +101,13 @@ header[data-testid="stHeader"] {
 [data-testid="stToolbarActions"] button[title="Settings"],
 [data-testid="stToolbarActions"] button[title="Print"] {
     display: none !important;
+    visibility: hidden !important;
+    width: 0 !important;
+    height: 0 !important;
+    overflow: hidden !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    border: none !important;
 }
 
 /* ── Sidebar ── */
@@ -108,8 +116,11 @@ section[data-testid="stSidebar"] {
     border-right: 1px solid #2a2a3e !important;
     padding-top: 1rem !important;
 }
-section[data-testid="stSidebar"] * {
+section[data-testid="stSidebar"] *:not(span) {
     color: #e0e0e0 !important;
+    font-family: 'Inter', sans-serif !important;
+}
+section[data-testid="stSidebar"] span {
     font-family: 'Inter', sans-serif !important;
 }
 section[data-testid="stSidebar"] hr {
@@ -272,7 +283,7 @@ div.stButton > button:active { background-color: #9900aa !important; }
 }
 
 /* ── All text in main area ── */
-p, span, label, div, h1, h2, h3, h4, h5, h6,
+p, label, div, h1, h2, h3, h4, h5, h6,
 .stMarkdown, [data-testid="stMarkdownContainer"] {
     color: #e0e0e0 !important;
 }

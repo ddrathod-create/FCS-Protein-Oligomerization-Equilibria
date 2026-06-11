@@ -49,115 +49,141 @@ PLOT_RC = {
     "axes.labelsize":   10,
 }
 
-# ── Custom CSS (force light theme regardless of system preference) ─────────────
+# ── CSS ────────────────────────────────────────────────────────────────────────
 st.markdown("""
 <style>
-    /* ── Force light theme globally ── */
-    html, body, [data-testid="stAppViewContainer"], [data-testid="stApp"] {
-        background-color: #f5f5f5 !important;
-        color: #1a1a1a !important;
-    }
-    /* Main content area */
-    .main .block-container {
-        background-color: #f5f5f5 !important;
-        color: #1a1a1a !important;
-        padding-top: 1.5rem;
-    }
-    /* Sidebar */
-    section[data-testid="stSidebar"] {
-        background-color: #ebebeb !important;
-    }
-    section[data-testid="stSidebar"] * {
-        color: #1a1a1a !important;
-    }
-    section[data-testid="stSidebar"] .stMarkdown h3 {
-        color: #0072b2 !important;
-        font-size: 1.1rem;
-    }
-    /* All text elements */
-    p, span, label, div, h1, h2, h3, h4, h5, h6,
-    .stMarkdown, .stCaption, [data-testid="stMarkdownContainer"] {
-        color: #1a1a1a !important;
-    }
-    /* Inputs */
-    input, textarea, select {
-        background-color: #ffffff !important;
-        color: #1a1a1a !important;
-        border: 1px solid #cccccc !important;
-    }
-    /* Selectbox / number input wrappers */
-    [data-testid="stSelectbox"] > div > div,
-    [data-testid="stNumberInput"] input {
-        background-color: #ffffff !important;
-        color: #1a1a1a !important;
-    }
-    /* Dropdown popup list */
-    [data-baseweb="popover"],
-    [data-baseweb="popover"] *,
-    [data-baseweb="menu"],
-    [data-baseweb="menu"] *,
-    li[role="option"],
-    li[role="option"] * {
-        background-color: #ffffff !important;
-        color: #1a1a1a !important;
-    }
-    li[role="option"]:hover,
-    li[role="option"][aria-selected="true"] {
-        background-color: #e8f0fb !important;
-        color: #0072b2 !important;
-    }
-    /* Data table */
-    [data-testid="stDataFrame"],
-    [data-testid="stDataFrame"] * {
-        background-color: #ffffff !important;
-        color: #1a1a1a !important;
-    }
-    /* Expander header */
-    [data-testid="stExpander"] summary,
-    [data-testid="stExpander"] summary * {
-        color: #1a1a1a !important;
-    }
-    /* Slider */
-    [data-testid="stSlider"] { color: #1a1a1a !important; }
-    /* Run button */
-    div.stButton > button {
-        width: 100%;
-        background-color: #000000 !important;
-        color: #ffffff !important;
-        font-weight: bold;
-        border-radius: 6px;
-        padding: 0.55rem;
-        border: none !important;
-        font-size: 1rem;
-        letter-spacing: 0.02em;
-    }
-    div.stButton > button:hover { background-color: #222222 !important; }
-    div.stButton > button:active { background-color: #444444 !important; }
-    /* Expander */
-    [data-testid="stExpander"] {
-        background-color: #ffffff !important;
-        border: 1px solid #dddddd !important;
-    }
-    /* Equation banner */
-    .eq-banner {
-        background: #ffffff;
-        border: 1px solid #d0d0d0;
-        border-left: 4px solid #0072b2;
-        border-radius: 6px;
-        padding: 0.65rem 1.1rem;
-        margin-bottom: 0.8rem;
-        font-size: 1.05rem;
-        color: #1a1a1a !important;
-        font-family: "Georgia", serif;
-    }
-    .eq-banner .eq-label {
-        font-size: 0.75rem;
-        font-family: sans-serif;
-        color: #666666 !important;
-        text-transform: uppercase;
-        letter-spacing: 0.06em;
-        margin-bottom: 0.2rem;
-    }
+/* ── Force light theme ── */
+html, body,
+[data-testid="stAppViewContainer"],
+[data-testid="stApp"] {
+    background-color: #f5f5f5 !important;
+    color: #1a1a1a !important;
+}
+.main .block-container {
+    background-color: #f5f5f5 !important;
+    color: #1a1a1a !important;
+    padding-top: 1.2rem;
+    padding-bottom: 1rem;
+}
+
+/* ── Sidebar ── */
+section[data-testid="stSidebar"] {
+    background-color: #eaeaea !important;
+}
+section[data-testid="stSidebar"] * {
+    color: #1a1a1a !important;
+}
+/* Tighten sidebar vertical rhythm */
+section[data-testid="stSidebar"] .stMarkdown          { margin-bottom: 0 !important; }
+section[data-testid="stSidebar"] .stSelectbox         { margin-bottom: 2px !important; }
+section[data-testid="stSidebar"] .stNumberInput       { margin-bottom: 2px !important; }
+section[data-testid="stSidebar"] .stSlider            { margin-bottom: 2px !important; }
+section[data-testid="stSidebar"] hr                   { margin: 6px 0 !important; }
+section[data-testid="stSidebar"] [data-testid="stVerticalBlock"] {
+    gap: 4px !important;
+}
+
+/* ── All text ── */
+p, span, label, div, h1, h2, h3, h4, h5, h6,
+.stMarkdown, .stCaption,
+[data-testid="stMarkdownContainer"] {
+    color: #1a1a1a !important;
+}
+
+/* ── Text inputs ── */
+input, textarea, select {
+    background-color: #ffffff !important;
+    color: #1a1a1a !important;
+    border: 1px solid #cccccc !important;
+}
+[data-testid="stSelectbox"] > div > div,
+[data-testid="stNumberInput"] input {
+    background-color: #ffffff !important;
+    color: #1a1a1a !important;
+}
+
+/* ── Number input stepper buttons (the +/- buttons) ── */
+[data-testid="stNumberInput"] button,
+[data-testid="stNumberInput"] button *,
+[data-testid="stNumberInput"] button svg,
+[data-testid="stNumberInput"] button svg path {
+    background-color: #1a1a1a !important;
+    color: #ffffff !important;
+    fill: #ffffff !important;
+}
+[data-testid="stNumberInput"] button:hover {
+    background-color: #333333 !important;
+}
+
+/* ── Dropdown popup ── */
+[data-baseweb="popover"],
+[data-baseweb="popover"] *,
+[data-baseweb="menu"],
+[data-baseweb="menu"] *,
+li[role="option"],
+li[role="option"] * {
+    background-color: #ffffff !important;
+    color: #1a1a1a !important;
+}
+li[role="option"]:hover,
+li[role="option"][aria-selected="true"] {
+    background-color: #e8f0fb !important;
+    color: #0072b2 !important;
+}
+
+/* ── Run button ── */
+div.stButton > button {
+    width: 100%;
+    background-color: #000000 !important;
+    color: #ffffff !important;
+    font-weight: bold;
+    border-radius: 6px;
+    padding: 0.5rem;
+    border: none !important;
+    font-size: 0.95rem;
+    letter-spacing: 0.02em;
+    margin-top: 4px;
+}
+div.stButton > button:hover  { background-color: #222222 !important; }
+div.stButton > button:active { background-color: #444444 !important; }
+
+/* ── Download button ── */
+[data-testid="stDownloadButton"] > button {
+    background-color: #0072b2 !important;
+    color: #ffffff !important;
+    font-weight: 600;
+    border: none !important;
+    border-radius: 6px;
+    padding: 0.45rem 1rem;
+}
+[data-testid="stDownloadButton"] > button:hover {
+    background-color: #005a8e !important;
+    color: #ffffff !important;
+}
+
+/* ── Slider ── */
+[data-testid="stSlider"] { color: #1a1a1a !important; }
+
+/* ── Equation banner ── */
+.eq-banner {
+    background: #ffffff;
+    border: 1px solid #d0d0d0;
+    border-left: 4px solid #0072b2;
+    border-radius: 6px;
+    padding: 0.6rem 1.1rem;
+    margin-bottom: 0.7rem;
+    font-size: 1.0rem;
+    color: #1a1a1a !important;
+    font-family: "Georgia", serif;
+}
+.eq-banner .eq-label {
+    font-size: 0.72rem;
+    font-family: sans-serif;
+    color: #666666 !important;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 0.15rem;
+}
 </style>
 """, unsafe_allow_html=True)
 
@@ -191,46 +217,38 @@ def tetramer_equilibria(C4, KD1, KD2, f, C_l):
     C = np.atleast_1d(np.array(4 * C4, dtype=float))
     r1 = 0.79 * 0.79
     r2 = 0.79
-
     c1 = np.zeros(len(C))
     for i, Ctot in enumerate(C):
         pp = [4 / (KD2**2 * KD1), 0, 2 / KD2, 1, -Ctot]
         roots = np.roots(pp)
         valid = roots[(roots.real > 0) & (np.abs(roots.imag) < 1e-10)].real
         c1[i] = valid[0]
-
     c2 = c1**2 / KD2
     c4 = c2**2 / KD1
-
-    alpha1 = c1       / C
-    alpha2 = 2 * c2   / C
-    alpha4 = 4 * c4   / C
-
+    alpha1 = c1      / C
+    alpha2 = 2 * c2  / C
+    alpha4 = 4 * c4  / C
     lf    = C_l * f / C
     denom = 1 + alpha2 * 1 * lf + alpha4 * 3 * lf
-    a1 = alpha1                    / denom
-    a2 = alpha2 * (1 +     lf)    / denom
-    a3 = alpha4 * (1 + 3 * lf)    / denom
-
+    a1 = alpha1                   / denom
+    a2 = alpha2 * (1 +     lf)   / denom
+    a3 = alpha4 * (1 + 3 * lf)   / denom
     b1 = r1 + r2 + 1
     b2 = a1 * r1 + a2 * r2 + a3
     b3 = r1 * r2 + r1 + r2
     b4 = a1 * r1 * (r2 + 1) + a2 * r2 * (r1 + 1) + a3 * (r2 + r1)
     b5 = r1 * r2
-
     tau_app = np.zeros(len(C))
     for i in range(len(C)):
         pp = [1, (b1 - 2 * b2[i]), (b3 - 2 * b4[i]), -b5]
         roots = np.roots(pp)
         valid = roots[(roots.real > 0) & (np.abs(roots.imag) < 1e-10)].real
         tau_app[i] = np.max(valid)
-
     return tau_app, alpha1, alpha2, np.zeros_like(alpha1), alpha4
 
 
 def run_simulation(model, KD, f, C_l, c_min, c_max, KD2=None, N=200):
     C_total = np.logspace(np.log10(c_min), np.log10(c_max), N)
-
     if model == "Dimer":
         C2 = C_total / 2
         tau_app, fM, fD, fT3, fT4 = dimer_equilibria(C2, KD, f, C_l)
@@ -239,11 +257,10 @@ def run_simulation(model, KD, f, C_l, c_min, c_max, KD2=None, N=200):
         C3 = C_total / 3
         tau_app, fM, fD, fT3, fT4 = trimer_equilibria(C3, KD, f, C_l)
         species = {"Monomer": fM, "Trimer": fT3}
-    else:  # Tetramer
+    else:
         C4 = C_total / 4
         tau_app, fM, fD, fT3, fT4 = tetramer_equilibria(C4, KD, KD2, f, C_l)
         species = {"Monomer": fM, "Dimer": fD, "Tetramer": fT4}
-
     return C_total, tau_app, species
 
 
@@ -263,10 +280,7 @@ def make_figure(C, tau, species, model):
             2, 1,
             height_ratios=[1.15, 1],
             hspace=0.55,
-            top=0.90,
-            bottom=0.09,
-            left=0.10,
-            right=0.95,
+            top=0.90, bottom=0.09, left=0.10, right=0.95,
         )
         ax_tau  = fig.add_subplot(gs[0])
         ax_frac = fig.add_subplot(gs[1])
@@ -279,7 +293,7 @@ def make_figure(C, tau, species, model):
                 sp.set_linewidth(0.8)
             ax.grid(True, color="#eeeeee", linewidth=0.5, linestyle="--")
 
-        # ── tau panel ─────────────────────────────────────────────────────────
+        # tau panel
         style_ax(ax_tau)
         ax_tau.plot(C, tau, color=C_TAU, linewidth=2.2,
                     solid_capstyle="round", label=r"$\tau_\mathrm{app}$")
@@ -288,8 +302,7 @@ def make_figure(C, tau, species, model):
         ax_tau.set_xlabel("Protein Concentration (nM)", color="#444444",
                            fontsize=9, labelpad=4)
         ax_tau.tick_params(axis="x", colors="#444444", labelsize=8)
-        ax_tau.xaxis.set_major_formatter(
-            ticker.FuncFormatter(lambda v, _: f"{v:g}"))
+        ax_tau.xaxis.set_major_formatter(ticker.FuncFormatter(lambda v, _: f"{v:g}"))
         ax_tau.set_ylabel(
             r"Normalized $\tau$  ($\tau_\mathrm{app}\ /\ \tau_\mathrm{D}$)",
             fontsize=9, labelpad=6)
@@ -298,11 +311,10 @@ def make_figure(C, tau, species, model):
         tau_lo = max(0.0, tau.min() - 0.05)
         ax_tau.set_ylim(tau_lo, 1.05)
 
-        # Top twin axis — oligomer concentration
+        # Twin top axis
         ax2x = ax_tau.twiny()
         ax2x.set_xscale("log")
         ax2x.set_xlim(C[0], C[-1])
-
         log_lo = int(np.floor(np.log10(C[0])))
         log_hi = int(np.ceil(np.log10(C[-1])))
         base_ticks = [10**e for e in range(log_lo, log_hi + 1)
@@ -318,7 +330,7 @@ def make_figure(C, tau, species, model):
             ax2x.spines[sp_name].set_color("#cccccc")
             ax2x.spines[sp_name].set_linewidth(0.8)
 
-        # ── fraction panel ────────────────────────────────────────────────────
+        # Fraction panel
         style_ax(ax_frac)
         for name, frac in species.items():
             col = species_colors.get(name, "#444444")
@@ -328,8 +340,7 @@ def make_figure(C, tau, species, model):
         ax_frac.set_xlim(C[0], C[-1])
         ax_frac.set_xlabel("Protein Concentration (nM)", fontsize=9, labelpad=4)
         ax_frac.tick_params(axis="x", labelsize=8)
-        ax_frac.xaxis.set_major_formatter(
-            ticker.FuncFormatter(lambda v, _: f"{v:g}"))
+        ax_frac.xaxis.set_major_formatter(ticker.FuncFormatter(lambda v, _: f"{v:g}"))
         ax_frac.set_ylabel("Fractional concentration  α", fontsize=9, labelpad=6)
         ax_frac.set_ylim(-0.02, 1.05)
         ax_frac.set_yticks([0, 0.25, 0.5, 0.75, 1.0])
@@ -350,7 +361,7 @@ with st.sidebar:
         ["Dimer ⇌ Monomer", "Trimer ⇌ Monomer", "Tetramer ⇌ Dimer ⇌ Monomer"],
         label_visibility="collapsed",
     )
-    model = model_label.split(" ")[0]  # "Dimer", "Trimer", or "Tetramer"
+    model = model_label.split(" ")[0]
 
     st.divider()
     st.markdown("**Model parameters**")
@@ -397,7 +408,7 @@ with st.sidebar:
 st.markdown("## FCS Oligomerization Simulator")
 st.caption("Apparent diffusion time and fractional species concentrations")
 
-# Validate inputs
+# Validate
 errors = []
 if c_min >= c_max:
     errors.append("'C min' must be less than 'C max'.")
@@ -407,24 +418,18 @@ if KD1 <= 0:
     errors.append("Kd must be > 0.")
 if model == "Tetramer" and KD2 <= 0:
     errors.append("Kd2 must be > 0.")
-
 if errors:
     for e in errors:
         st.error(e)
     st.stop()
 
-# Auto-run on first load OR when button pressed
+# Run
 if run_btn or "last_result" not in st.session_state:
     with st.spinner("Running simulation…"):
         try:
             C, tau, species = run_simulation(
-                model=model,
-                KD=KD1,
-                f=f,
-                C_l=C_l,
-                c_min=c_min,
-                c_max=c_max,
-                KD2=KD2,
+                model=model, KD=KD1, f=f, C_l=C_l,
+                c_min=c_min, c_max=c_max, KD2=KD2,
             )
             st.session_state["last_result"] = {
                 "C": C, "tau": tau, "species": species,
@@ -438,18 +443,17 @@ if run_btn or "last_result" not in st.session_state:
 res = st.session_state["last_result"]
 C, tau, species = res["C"], res["tau"], res["species"]
 
-# ── Equilibrium equation banner ────────────────────────────────────────────────
+# ── Equation banner ────────────────────────────────────────────────────────────
 EQ_HTML = {
     "Dimer":    "2 M &nbsp;⇌&nbsp; D &emsp;&emsp; K<sub>d</sub> = [M]² / [D]",
     "Trimer":   "3 M &nbsp;⇌&nbsp; T₃ &emsp;&emsp; K<sub>d</sub> = [M]³ / [T₃]",
     "Tetramer": "2 M &nbsp;⇌&nbsp; D &emsp;⇌&emsp; T₄ &emsp;&emsp;"
                 "K<sub>d2</sub> = [M]² / [D] &emsp; K<sub>d1</sub> = [D]² / [T₄]",
 }
-eq_html = EQ_HTML[res["model"]]
 st.markdown(
     f'<div class="eq-banner">'
     f'  <div class="eq-label">Active equilibrium</div>'
-    f'  {eq_html}'
+    f'  {EQ_HTML[res["model"]]}'
     f'</div>',
     unsafe_allow_html=True,
 )
@@ -459,18 +463,15 @@ fig = make_figure(C, tau, species, res["model"])
 st.pyplot(fig, use_container_width=True)
 plt.close(fig)
 
-# ── Data table (expandable) ────────────────────────────────────────────────────
-with st.expander("📄  Show raw data table"):
-    import pandas as pd
-    df_data = {"Concentration (nM)": C, "tau_app": tau}
-    df_data.update(species)
-    df = pd.DataFrame(df_data)
-    st.dataframe(df.style.format("{:.5g}"), use_container_width=True, height=300)
-
-    csv = df.to_csv(index=False).encode("utf-8")
-    st.download_button(
-        "⬇  Download CSV",
-        data=csv,
-        file_name=f"fcs_{res['model'].lower()}_simulation.csv",
-        mime="text/csv",
-    )
+# ── Download CSV (no table shown) ─────────────────────────────────────────────
+import pandas as pd
+df_data = {"Concentration (nM)": C, "tau_app": tau}
+df_data.update(species)
+df = pd.DataFrame(df_data)
+csv = df.to_csv(index=False).encode("utf-8")
+st.download_button(
+    label="⬇  Download data as CSV",
+    data=csv,
+    file_name=f"fcs_{res['model'].lower()}_simulation.csv",
+    mime="text/csv",
+)

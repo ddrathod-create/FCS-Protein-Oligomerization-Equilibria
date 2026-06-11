@@ -4,7 +4,7 @@ Created on Wed Jun 10 11:27:19 2026
 
 """
 """
-FCS Oligomerization Simulator
+FCS Oligomerization Simulator 
 """
 
 import numpy as np
@@ -409,7 +409,8 @@ def make_figure(C, tau, species, model):
         ax_tau.set_xlabel("Protein Concentration (nM)", color="#ccccdd", fontsize=9, labelpad=4)
         ax_tau.tick_params(axis="x", colors="#ccccdd", labelsize=8)
         ax_tau.xaxis.set_major_formatter(ticker.FuncFormatter(lambda v, _: f"{v:g}"))
-        ax_tau.set_ylabel(r"$\tau_\mathrm{app}\ /\ \tau_\mathrm{D}$", fontsize=9, labelpad=6, color="#eeeeee")
+        tau_subscript = {2: "2", 3: "3", 4: "4"}.get(n, "D")
+        ax_tau.set_ylabel(rf"$\tau_\mathrm{{app}}\ /\ \tau_{{{tau_subscript}}}$", fontsize=9, labelpad=6, color="#eeeeee")
         tau_lo = max(0.0, tau.min() - 0.05)
         ax_tau.set_ylim(tau_lo, 1.05)
         ax_tau.tick_params(axis="y", colors="#ccccdd", labelsize=8)

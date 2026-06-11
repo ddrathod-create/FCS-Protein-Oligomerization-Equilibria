@@ -528,23 +528,16 @@ with st.sidebar:
 
 
 # ── Main area ─────────────────────────────────────────────────────────────────────
-EQ_SUBTITLES = {
-    "Dimer":    "Interactive simulation of dimer ⇌ monomer equilibrium by FCS",
-    "Trimer":   "Interactive simulation of trimer ⇌ monomer equilibrium by FCS",
-    "Tetramer": "Interactive simulation of tetramer ⇌ dimer ⇌ monomer equilibrium by FCS",
-}
-
 st.markdown(
     "<div class='page-header'>"
     "<span class='page-icon'>🔬</span>"
     "<span class='page-title'>FCS Oligomerization Simulator</span>"
-    f"<div class='page-subtitle'>{EQ_SUBTITLES.get(model, '')}</div>"
     "</div>",
     unsafe_allow_html=True,
 )
 
-# Section heading
-st.markdown("<div class='section-heading'>Simulation Output</div>", unsafe_allow_html=True)
+# Section heading — shows the active equilibrium model
+st.markdown(f"<div class='section-heading'>{EQ_LABELS[model]}</div>", unsafe_allow_html=True)
 
 # Validate
 errors = []

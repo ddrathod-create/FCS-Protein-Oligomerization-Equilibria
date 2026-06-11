@@ -56,29 +56,27 @@ html, body,
     color: #1a1a1a !important;
 }
 
-/* Fix header so top-right icons (Share, ⋮) are visible */
-[data-testid="stHeader"] {
+/* Fix header + top-right toolbar icons (Share, ⋮) */
+[data-testid="stHeader"],
+header[data-testid="stHeader"] {
     background-color: #f8f8f6 !important;
     border-bottom: 1px solid #e0e0e0 !important;
 }
-[data-testid="stHeader"] * {
-    color: #1a1a1a !important;
+/* Toolbar sits outside stHeader in some Streamlit versions */
+[data-testid="stToolbarActions"],
+[data-testid="stToolbarActions"] button,
+[data-testid="stToolbarActions"] a,
+[data-testid="stToolbarActions"] svg,
+[data-testid="stToolbarActions"] svg path,
+[data-testid="stToolbarActions"] svg circle,
+[data-testid="stToolbarActions"] svg rect {
+    color: #222222 !important;
+    fill: #222222 !important;
+    stroke: none !important;
 }
-[data-testid="stHeader"] button,
-[data-testid="stHeader"] svg,
-[data-testid="stHeader"] svg path {
-    color: #333333 !important;
-    fill: #333333 !important;
-    stroke: #333333 !important;
-}
-[data-testid="stToolbar"] {
-    color: #333333 !important;
-}
-[data-testid="stToolbar"] button {
-    color: #333333 !important;
-}
-[data-testid="stToolbar"] svg path {
-    fill: #333333 !important;
+[data-testid="stToolbarActions"] button:hover svg path,
+[data-testid="stToolbarActions"] button:hover svg circle {
+    fill: #0072b2 !important;
 }
 
 .main .block-container {
@@ -98,17 +96,15 @@ section[data-testid="stSidebar"] * {
 }
 section[data-testid="stSidebar"] hr {
     border-color: #3a3a3a !important;
-    margin: 12px 0 !important;
+    margin: 14px 0 !important;
 }
-section[data-testid="stSidebar"] [data-testid="stVerticalBlock"] {
-    gap: 2px !important;
-}
-section[data-testid="stSidebar"] .stMarkdown { margin-bottom: 0 !important; }
+/* Removed gap override — it was collapsing all whitespace */
+section[data-testid="stSidebar"] .stMarkdown { margin-bottom: 4px !important; }
 
-/* Add breathing room between sidebar input groups */
-section[data-testid="stSidebar"] .stSelectbox  { margin-bottom: 6px !important; }
-section[data-testid="stSidebar"] .stNumberInput { margin-bottom: 8px !important; }
-section[data-testid="stSidebar"] .stSlider      { margin-bottom: 8px !important; }
+/* Generous spacing between each input group */
+section[data-testid="stSidebar"] .stSelectbox  { margin-bottom: 14px !important; }
+section[data-testid="stSidebar"] .stNumberInput { margin-bottom: 14px !important; }
+section[data-testid="stSidebar"] .stSlider      { margin-bottom: 16px !important; }
 
 /* Sidebar section headers */
 .sidebar-section-label {
@@ -117,8 +113,8 @@ section[data-testid="stSidebar"] .stSlider      { margin-bottom: 8px !important;
     text-transform: uppercase;
     color: #888888 !important;
     font-weight: 600;
-    margin-bottom: 6px;
-    margin-top: 4px;
+    margin-bottom: 8px;
+    margin-top: 6px;
     display: block;
 }
 

@@ -50,41 +50,89 @@ PLOT_RC = {
     "axes.labelsize":   10,
 }
 
-# ── Custom CSS ─────────────────────────────────────────────────────────────────
+# ── Custom CSS (force light theme regardless of system preference) ─────────────
 st.markdown("""
 <style>
-    /* Sidebar background */
+    /* ── Force light theme globally ── */
+    html, body, [data-testid="stAppViewContainer"], [data-testid="stApp"] {
+        background-color: #f5f5f5 !important;
+        color: #1a1a1a !important;
+    }
+    /* Main content area */
+    .main .block-container {
+        background-color: #f5f5f5 !important;
+        color: #1a1a1a !important;
+        padding-top: 1.5rem;
+    }
+    /* Sidebar */
     section[data-testid="stSidebar"] {
-        background-color: #f0f0f0;
+        background-color: #ebebeb !important;
+    }
+    section[data-testid="stSidebar"] * {
+        color: #1a1a1a !important;
     }
     section[data-testid="stSidebar"] .stMarkdown h3 {
-        color: #0072b2;
+        color: #0072b2 !important;
         font-size: 1.1rem;
     }
-    /* Main run button */
+    /* All text elements */
+    p, span, label, div, h1, h2, h3, h4, h5, h6,
+    .stMarkdown, .stCaption, [data-testid="stMarkdownContainer"] {
+        color: #1a1a1a !important;
+    }
+    /* Inputs */
+    input, textarea, select {
+        background-color: #ffffff !important;
+        color: #1a1a1a !important;
+        border: 1px solid #cccccc !important;
+    }
+    /* Selectbox / number input wrappers */
+    [data-testid="stSelectbox"] > div > div,
+    [data-testid="stNumberInput"] input {
+        background-color: #ffffff !important;
+        color: #1a1a1a !important;
+    }
+    /* Slider */
+    [data-testid="stSlider"] { color: #1a1a1a !important; }
+    /* Run button */
     div.stButton > button {
         width: 100%;
-        background-color: #000000;
-        color: #ffffff;
+        background-color: #000000 !important;
+        color: #ffffff !important;
         font-weight: bold;
         border-radius: 6px;
         padding: 0.55rem;
-        border: none;
+        border: none !important;
         font-size: 1rem;
         letter-spacing: 0.02em;
-        transition: background 0.15s;
     }
-    div.stButton > button:hover {
-        background-color: #222222;
-        color: #ffffff;
+    div.stButton > button:hover { background-color: #222222 !important; }
+    div.stButton > button:active { background-color: #444444 !important; }
+    /* Expander */
+    [data-testid="stExpander"] {
+        background-color: #ffffff !important;
+        border: 1px solid #dddddd !important;
     }
-    div.stButton > button:active {
-        background-color: #444444;
+    /* Equation banner */
+    .eq-banner {
+        background: #ffffff;
+        border: 1px solid #d0d0d0;
+        border-left: 4px solid #0072b2;
+        border-radius: 6px;
+        padding: 0.65rem 1.1rem;
+        margin-bottom: 0.8rem;
+        font-size: 1.05rem;
+        color: #1a1a1a !important;
+        font-family: "Georgia", serif;
     }
-    /* Remove excess top padding */
-    .block-container { padding-top: 1.5rem; }
-    /* Metric labels */
-    [data-testid="metric-container"] label { font-size: 0.78rem; }
+    .eq-banner .eq-label {
+        font-size: 0.75rem;
+        font-family: sans-serif;
+        color: #666666 !important;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+        margin-bottom: 0.2rem;
+    }
 </style>
 """, unsafe_allow_html=True)
 
@@ -365,20 +413,21 @@ if run_btn or "last_result" not in st.session_state:
 res = st.session_state["last_result"]
 C, tau, species = res["C"], res["tau"], res["species"]
 
-# ── Summary metrics ────────────────────────────────────────────────────────────
-tau_min  = float(tau.min())
-tau_range = float(tau.max() - tau.min())
-
-# Crossover concentration: where monomer fraction ≈ 0.5
-mono = species.get("Monomer", np.ones_like(C))
-idx_cross = int(np.argmin(np.abs(mono - 0.5)))
-c_cross = float(C[idx_cross])
-
-m1, m2, m3 = st.columns(3)
-m1.metric("τ_app at C_min", f"{tau[0]:.3f}", help="Normalized diffusion time at lowest concentration")
-m2.metric("τ_app at C_max", f"{tau[-1]:.3f}", help="Normalized diffusion time at highest concentration")
-m3.metric("~50 % oligomer at", f"{c_cross:.1f} nM",
-          help="Concentration where monomer fraction ≈ 0.5")
+# ── Equilibrium equation banner ────────────────────────────────────────────────
+EQ_HTML = {
+    "Dimer":    "2 M &nbsp;⇌&nbsp; D &emsp;&emsp; K<sub>d</sub> = [M]² / [D]",
+    "Trimer":   "3 M &nbsp;⇌&nbsp; T₃ &emsp;&emsp; K<sub>d</sub> = [M]³ / [T₃]",
+    "Tetramer": "2 M &nbsp;⇌&nbsp; D &emsp;⇌&emsp; T₄ &emsp;&emsp;"
+                "K<sub>d2</sub> = [M]² / [D] &emsp; K<sub>d1</sub> = [D]² / [T₄]",
+}
+eq_html = EQ_HTML[res["model"]]
+st.markdown(
+    f'<div class="eq-banner">'
+    f'  <div class="eq-label">Active equilibrium</div>'
+    f'  {eq_html}'
+    f'</div>',
+    unsafe_allow_html=True,
+)
 
 # ── Plot ───────────────────────────────────────────────────────────────────────
 fig = make_figure(C, tau, species, res["model"])

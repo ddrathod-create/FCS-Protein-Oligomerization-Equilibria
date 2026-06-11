@@ -90,15 +90,15 @@ header[data-testid="stHeader"] {
 [data-testid="stToolbarActions"] button:hover svg circle {
     fill: #e040fb !important;
 }
-/* Hide print / theme-toggle / settings buttons from toolbar */
+/* Hide deploy button (white square) and unwanted toolbar buttons */
+[data-testid="stAppDeployButton"],
 [data-testid="stToolbarActions"] button[aria-label="Print app"],
 [data-testid="stToolbarActions"] button[aria-label="Toggle theme"],
 [data-testid="stToolbarActions"] button[aria-label="Open settings"],
 [data-testid="stToolbarActions"] button[title="Print app"],
 [data-testid="stToolbarActions"] button[title="Toggle theme"],
 [data-testid="stToolbarActions"] button[title="Settings"],
-[data-testid="stToolbarActions"] button[title="Print"],
-[data-testid="stToolbarActions"] button[data-testid="baseButton-headerNoPadding"]:not(:last-child):not(:nth-last-child(2)) {
+[data-testid="stToolbarActions"] button[title="Print"] {
     display: none !important;
 }
 
@@ -151,17 +151,14 @@ section[data-testid="stSidebar"] [data-testid="stNumberInput"] button:hover {
 section[data-testid="stSidebar"] [data-testid="stSlider"] p {
     color: #aaaaaa !important;
 }
-/* Hide the Material Icons glyph Streamlit injects into the slider thumb */
-section[data-testid="stSidebar"] [data-testid="stSlider"] span[data-testid="stTickBarMin"],
-section[data-testid="stSidebar"] [data-testid="stSlider"] span[data-testid="stTickBarMax"] {
-    color: #aaaaaa !important;
-}
-section[data-testid="stSidebar"] [data-testid="stSlider"] [role="slider"] span,
-section[data-testid="stSidebar"] [data-testid="stSlider"] div[class*="thumb"] span,
-section[data-testid="stSidebar"] [data-testid="stSlider"] [class*="StyledThumb"] span {
+/* Kill ALL spans inside slider — prevents Material Icons glyph showing as text */
+section[data-testid="stSidebar"] [data-testid="stSlider"] span {
     font-size: 0 !important;
     color: transparent !important;
-    visibility: hidden !important;
+    line-height: 0 !important;
+    overflow: hidden !important;
+    display: inline-block !important;
+    width: auto !important;
 }
 
 /* ── Dropdown popup ── */

@@ -304,13 +304,13 @@ p, label, div, h1, h2, h3, h4, h5, h6,
 """, unsafe_allow_html=True)
 
 
-# ── Physics ─────────────────────────────────────────────────────────────────────
+# ── Equlibria eqn ─────────────────────────────────────────────────────────────────────
 def dimer_equilibria(C2, KD, f, C_l):
     C = 2 * C2
     r2 = 0.79
     alpha1 = (1 / (C * 4)) * (-KD + np.sqrt(8 * C * KD + KD**2))
     alpha2 = 1 - alpha1
-    lf    = (2 * C_l * f) / C #labeled fraction
+    lf    = (2 * C_l * f) / C 
     c = 1 - 2 * (alpha1 / (1 + (1 - alpha1) * lf))
     tau_app = 0.5 * (c * (1 - r2) + np.sqrt(c**2 * (1 - r2)**2 + 4 * r2))
     return tau_app, alpha1, alpha2, np.zeros_like(alpha1), np.zeros_like(alpha1)
@@ -324,7 +324,7 @@ def trimer_equilibria(C3, KDE, f, C_l):
     f2 = (a1**(1/3)) / (2**(1/3) * C**2)
     alpha1 = (1/3) * (-f1 + f2)
     alpha3 = 1 - alpha1
-    lf    = (3 * C_l * f) / C #labeled fraction
+    lf    = (3 * C_l * f) / C 
     c = 1 - 2 * (alpha1 / (1 + (1 - alpha1) * (2 * lf)))
     tau_app = 0.5 * (c * (1 - r3) + np.sqrt(c**2 * (1 - r3)**2 + 4 * r3))
     return tau_app, alpha1, np.zeros_like(alpha1), alpha3, np.zeros_like(alpha1)

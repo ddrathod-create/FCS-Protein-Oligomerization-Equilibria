@@ -3,7 +3,9 @@
 Created on Wed Jun 10 11:27:19 2026
 
 """
-
+"""
+FCS Oligomerization Simulator 
+"""
 
 import numpy as np
 import streamlit as st
@@ -12,7 +14,7 @@ import matplotlib.ticker as ticker
 import pandas as pd
 
 st.set_page_config(
-    page_title="Protein Oligomerization Simulator",
+    page_title="FCS Oligomerization Explorer",
     page_icon="🔬",
     layout="wide",
 )
@@ -139,13 +141,13 @@ section[data-testid="stSidebar"] span {
 }
 section[data-testid="stSidebar"] hr {
     border-color: #2a2a3e !important;
-    margin: 18px 0 !important;
+    margin: 10px 0 !important;
 }
 section[data-testid="stSidebar"] .stMarkdown {
-    margin-bottom: 6px !important;
+    margin-bottom: 2px !important;
 }
-section[data-testid="stSidebar"] .stSelectbox  { margin-bottom: 18px !important; }
-section[data-testid="stSidebar"] .stNumberInput { margin-bottom: 18px !important; }
+section[data-testid="stSidebar"] .stSelectbox  { margin-bottom: 8px !important; }
+section[data-testid="stSidebar"] .stNumberInput { margin-bottom: 8px !important; }
 
 
 /* Sidebar inputs */
@@ -195,17 +197,42 @@ li[role="option"][aria-selected="true"] {
     text-transform: uppercase;
     color: #7070a0 !important;
     font-weight: 700;
-    margin-bottom: 10px;
-    margin-top: 2px;
+    margin-bottom: 6px;
+    margin-top: 0px;
     display: block;
     font-family: 'Plus Jakarta Sans', sans-serif !important;
 }
 .sidebar-input-label {
     font-size: 0.82rem;
     color: #b0b0cc !important;
-    margin-bottom: 3px;
     display: block;
     font-family: 'Plus Jakarta Sans', sans-serif !important;
+}
+.label-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2px;
+}
+.help-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 15px;
+    height: 15px;
+    min-width: 15px;
+    border-radius: 50%;
+    border: 1px solid #5a5a7c;
+    color: #8888b0;
+    font-size: 0.65rem;
+    font-weight: 600;
+    cursor: help;
+    flex-shrink: 0;
+    margin-left: 8px;
+}
+.help-icon:hover {
+    border-color: #e040fb;
+    color: #e040fb;
 }
 
 /* ── Run button ── */
@@ -304,13 +331,13 @@ p, label, div, h1, h2, h3, h4, h5, h6,
 """, unsafe_allow_html=True)
 
 
-# ── Equlibria eqn ─────────────────────────────────────────────────────────────────────
+# ── Physics ─────────────────────────────────────────────────────────────────────
 def dimer_equilibria(C2, KD, f, C_l):
     C = 2 * C2
     r2 = 0.79
     alpha1 = (1 / (C * 4)) * (-KD + np.sqrt(8 * C * KD + KD**2))
     alpha2 = 1 - alpha1
-    lf    = (2 * C_l * f) / C 
+    lf    = (2 * C_l * f) / C #labeled fraction
     c = 1 - 2 * (alpha1 / (1 + (1 - alpha1) * lf))
     tau_app = 0.5 * (c * (1 - r2) + np.sqrt(c**2 * (1 - r2)**2 + 4 * r2))
     return tau_app, alpha1, alpha2, np.zeros_like(alpha1), np.zeros_like(alpha1)
@@ -324,7 +351,7 @@ def trimer_equilibria(C3, KDE, f, C_l):
     f2 = (a1**(1/3)) / (2**(1/3) * C**2)
     alpha1 = (1/3) * (-f1 + f2)
     alpha3 = 1 - alpha1
-    lf    = (3 * C_l * f) / C 
+    lf    = (3 * C_l * f) / C #labeled fraction
     c = 1 - 2 * (alpha1 / (1 + (1 - alpha1) * (2 * lf)))
     tau_app = 0.5 * (c * (1 - r3) + np.sqrt(c**2 * (1 - r3)**2 + 4 * r3))
     return tau_app, alpha1, np.zeros_like(alpha1), alpha3, np.zeros_like(alpha1)
@@ -463,7 +490,13 @@ with st.sidebar:
     run_btn = st.button("▶  Run Simulation", use_container_width=True)
     st.divider()
 
-    st.markdown("<span class='sidebar-label'>Equilibrium Model</span>", unsafe_allow_html=True)
+    st.markdown(
+        "<div class='label-row'>"
+        "<span class='sidebar-label' style='margin-bottom:0;'>Equilibrium Model</span>"
+        "<span class='help-icon' title='Choose which oligomerization equilibrium to simulate: a simple dimer, trimer, or a tetramer that assembles via a dimer intermediate.'>?</span>"
+        "</div>",
+        unsafe_allow_html=True,
+    )
     model_label = st.selectbox("model", list(EQ_LABELS.values()), label_visibility="collapsed")
     model = [k for k, v in EQ_LABELS.items() if v == model_label][0]
 
@@ -471,44 +504,59 @@ with st.sidebar:
     st.markdown("<span class='sidebar-label'>Model Parameters</span>", unsafe_allow_html=True)
 
     if model == "Tetramer":
-        st.markdown(
-            "<span class='sidebar-input-label'>K<sub>d1</sub> (tetramer→dimer) (nM)</span>",
-            unsafe_allow_html=True,
-        )
-        KD1 = st.number_input("Kd1", label_visibility="collapsed",
-                               min_value=1e-6, max_value=1e9, value=10.0, step=10.0, format="%.4g")
-        st.markdown(
-            "<span class='sidebar-input-label'>K<sub>d2</sub> (dimer→monomer) (nM)</span>",
-            unsafe_allow_html=True,
-        )
-        KD2 = st.number_input("Kd2", label_visibility="collapsed",
-                               min_value=1e-6, max_value=1e9, value=1.0, step=10.0, format="%.4g")
+        col_kd1, col_kd2 = st.columns(2)
+        with col_kd1:
+            st.markdown(
+                "<div class='label-row'><span class='sidebar-input-label'>K<sub>d1</sub> (nM)</span>"
+                "<span class='help-icon' title='Dissociation constant for the dimer ⇌ tetramer step (nM). Lower values favor tetramer formation.'>?</span></div>",
+                unsafe_allow_html=True,
+            )
+            KD1 = st.number_input("Kd1", label_visibility="collapsed",
+                                   min_value=1e-6, max_value=1e9, value=100.0, step=10.0, format="%.4g")
+        with col_kd2:
+            st.markdown(
+                "<div class='label-row'><span class='sidebar-input-label'>K<sub>d2</sub> (nM)</span>"
+                "<span class='help-icon' title='Dissociation constant for the monomer ⇌ dimer step (nM). Lower values favor dimer formation.'>?</span></div>",
+                unsafe_allow_html=True,
+            )
+            KD2 = st.number_input("Kd2", label_visibility="collapsed",
+                                   min_value=1e-6, max_value=1e9, value=500.0, step=10.0, format="%.4g")
     else:
         st.markdown(
-            "<span class='sidebar-input-label'>K<sub>d</sub> (nM)</span>",
+            "<div class='label-row'><span class='sidebar-input-label'>K<sub>d</sub> (nM)</span>"
+            "<span class='help-icon' title='Dissociation constant for the monomer ⇌ oligomer equilibrium (nM). Lower values favor oligomer formation.'>?</span></div>",
             unsafe_allow_html=True,
         )
         KD1 = st.number_input("Kd", label_visibility="collapsed",
                                min_value=1e-6, max_value=1e9, value=100.0, step=10.0, format="%.4g")
         KD2 = None
 
-    st.markdown(
-        "<span class='sidebar-input-label'>Labelling efficiency f (0–1)</span>",
-        unsafe_allow_html=True,
-    )
-    f = st.number_input("f", label_visibility="collapsed",
-                        min_value=0.0, max_value=1.0, value=0.5, step=0.05, format="%.2f")
-
-    st.markdown(
-        "<span class='sidebar-input-label'>Labeled concentration C<sub>L</sub> (nM)</span>",
-        unsafe_allow_html=True,
-    )
-    C_l = st.number_input("CL", label_visibility="collapsed",
-                           min_value=0.0, max_value=1e6, value=1.0, step=0.1, format="%.4g")
+    col_f, col_cl = st.columns(2)
+    with col_f:
+        st.markdown(
+            "<div class='label-row'><span class='sidebar-input-label'>Label. eff. f</span>"
+            "<span class='help-icon' title='Labelling efficiency (0–1): the fraction of protein molecules carrying a fluorescent label.'>?</span></div>",
+            unsafe_allow_html=True,
+        )
+        f = st.number_input("f", label_visibility="collapsed",
+                            min_value=0.0, max_value=1.0, value=0.5, step=0.05, format="%.2f")
+    with col_cl:
+        st.markdown(
+            "<div class='label-row'><span class='sidebar-input-label'>C<sub>L</sub> (nM)</span>"
+            "<span class='help-icon' title='Concentration of labeled protein in the sample (nM).'>?</span></div>",
+            unsafe_allow_html=True,
+        )
+        C_l = st.number_input("CL", label_visibility="collapsed",
+                               min_value=0.0, max_value=1e6, value=1.0, step=0.1, format="%.4g")
 
     st.divider()
-    st.markdown("<span class='sidebar-label'>Protein Concentration Range (<span style='text-transform:none;'>nM</span>)</span>",
-                unsafe_allow_html=True)
+    st.markdown(
+        "<div class='label-row'>"
+        "<span class='sidebar-label' style='margin-bottom:0;'>Conc. Range (nM)</span>"
+        "<span class='help-icon' title='Range of total protein concentration to simulate (nM), shown on the log-scale x-axis of the plots.'>?</span>"
+        "</div>",
+        unsafe_allow_html=True,
+    )
     col_lo, col_hi = st.columns(2)
     with col_lo:
         st.markdown("<span class='sidebar-input-label'>Min</span>", unsafe_allow_html=True)
@@ -524,8 +572,9 @@ with st.sidebar:
 st.markdown(
     "<div class='page-header'>"
     "<span class='page-icon'>🔬</span>"
-    "<span class='page-title'>Protein Oligomerization Simulator</span>"
-    "<div class='page-subtitle'>FCS-based simulation of oligomer equilibria</div>",
+    "<span class='page-title'>FCS Oligomerization Explorer</span>"
+    "<div class='page-subtitle'>Apparent diffusion times across self-association equilibria</div>"
+    "</div>",
     unsafe_allow_html=True,
 )
 

@@ -478,13 +478,13 @@ with st.sidebar:
             unsafe_allow_html=True,
         )
         KD1 = st.number_input("Kd1", label_visibility="collapsed",
-                               min_value=1e-6, max_value=1e9, value=100.0, step=10.0, format="%.4g")
+                               min_value=1e-6, max_value=1e9, value=200.0, step=10.0, format="%.4g")
         st.markdown(
             "<span class='sidebar-input-label'>K<sub>d2</sub> — monomer→dimer (nM)</span>",
             unsafe_allow_html=True,
         )
         KD2 = st.number_input("Kd2", label_visibility="collapsed",
-                               min_value=1e-6, max_value=1e9, value=500.0, step=10.0, format="%.4g")
+                               min_value=1e-6, max_value=1e9, value=20.0, step=10.0, format="%.4g")
     else:
         st.markdown(
             "<span class='sidebar-input-label'>K<sub>d</sub> (nM)</span>",
@@ -542,20 +542,32 @@ if errors:
     for e in errors: st.error(e)
     st.stop()
 
-# Run — live, recomputes automatically whenever any input changes
-try:
-    C, tau, species = run_simulation(
-        model=model, KD=KD1, f=f, C_l=C_l,
-        c_min=c_min, c_max=c_max, KD2=KD2,
-    )
-except Exception as exc:
-    st.error(f"Simulation error: {exc}")
-    st.stop()
+# Run — live refresh on model-selector change; other params need "Run Simulation"
+if "last_result" not in st.session_state:
+    st.session_state["last_result"] = None
+    st.session_state["last_model"] = None
+
+model_changed = model != st.session_state["last_model"]
+
+if st.session_state["last_result"] is None or model_changed or run_btn:
+    try:
+        C, tau, species = run_simulation(
+            model=model, KD=KD1, f=f, C_l=C_l,
+            c_min=c_min, c_max=c_max, KD2=KD2,
+        )
+        st.session_state["last_result"] = dict(C=C, tau=tau, species=species, model=model)
+        st.session_state["last_model"] = model
+    except Exception as exc:
+        st.error(f"Simulation error: {exc}")
+        st.stop()
+
+res = st.session_state["last_result"]
+C, tau, species, model_used = res["C"], res["tau"], res["species"], res["model"]
 
 # Section heading
-st.markdown(f"<div class='section-heading'>{EQ_LABELS[model]}</div>", unsafe_allow_html=True)
+st.markdown(f"<div class='section-heading'>{EQ_LABELS[model_used]}</div>", unsafe_allow_html=True)
 
-fig = make_figure(C, tau, species, model)
+fig = make_figure(C, tau, species, model_used)
 st.pyplot(fig, use_container_width=True)
 plt.close(fig)
 
@@ -567,6 +579,6 @@ csv = df.to_csv(index=False).encode("utf-8")
 st.download_button(
     label="⬇  Download CSV",
     data=csv,
-    file_name=f"fcs_{model.lower()}_simulation.csv",
+    file_name=f"fcs_{model_used.lower()}_simulation.csv",
     mime="text/csv",
 )

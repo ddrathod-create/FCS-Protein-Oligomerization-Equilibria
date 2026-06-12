@@ -462,15 +462,7 @@ EQ_LABELS = {
 }
 
 with st.sidebar:
-    st.markdown(
-        "<div style='font-size:1.1rem; font-weight:700; color:#ffffff !important;"
-        " letter-spacing:-0.01em; padding:6px 0 2px 0; font-family:\"Source Serif 4\",serif;'>"
-        "🔬 FCS Simulator</div>"
-        "<div style='font-size:0.72rem; color:#7070a0 !important; margin-bottom:4px;"
-        " letter-spacing:0.05em; font-family:\"Source Serif 4\",serif;'>"
-        "Oligomerization equilibria</div>",
-        unsafe_allow_html=True,
-    )
+    run_btn = st.button("▶  Run Simulation", use_container_width=True)
     st.divider()
 
     st.markdown("<span class='sidebar-label'>Equilibrium Model</span>", unsafe_allow_html=True)
@@ -529,9 +521,6 @@ with st.sidebar:
         c_max = st.number_input("Max", label_visibility="collapsed",
                                  min_value=1e-6, max_value=1e9, value=1000.0, step=100.0, format="%.4g")
 
-    st.divider()
-    run_btn = st.button("▶  Run Simulation", use_container_width=True)
-
 
 # ── Main area ─────────────────────────────────────────────────────────────────────
 st.markdown(
@@ -553,32 +542,20 @@ if errors:
     for e in errors: st.error(e)
     st.stop()
 
-# Run
-if run_btn or "last_result" not in st.session_state:
-    with st.spinner("Running simulation…"):
-        try:
-            C, tau, species = run_simulation(
-                model=model, KD=KD1, f=f, C_l=C_l,
-                c_min=c_min, c_max=c_max, KD2=KD2,
-            )
-            st.session_state["last_result"] = dict(
-                C=C, tau=tau, species=species,
-                model=model, KD=KD1, KD2=KD2, f=f, C_l=C_l,
-            )
-        except Exception as exc:
-            st.error(f"Simulation error: {exc}")
-            st.stop()
-
-if "last_result" not in st.session_state:
+# Run — live, recomputes automatically whenever any input changes
+try:
+    C, tau, species = run_simulation(
+        model=model, KD=KD1, f=f, C_l=C_l,
+        c_min=c_min, c_max=c_max, KD2=KD2,
+    )
+except Exception as exc:
+    st.error(f"Simulation error: {exc}")
     st.stop()
 
-res = st.session_state["last_result"]
-C, tau, species = res["C"], res["tau"], res["species"]
+# Section heading
+st.markdown(f"<div class='section-heading'>{EQ_LABELS[model]}</div>", unsafe_allow_html=True)
 
-# Section heading — sourced from last_result so it only appears after Run is pressed
-st.markdown(f"<div class='section-heading'>{EQ_LABELS[res['model']]}</div>", unsafe_allow_html=True)
-
-fig = make_figure(C, tau, species, res["model"])
+fig = make_figure(C, tau, species, model)
 st.pyplot(fig, use_container_width=True)
 plt.close(fig)
 
@@ -590,6 +567,6 @@ csv = df.to_csv(index=False).encode("utf-8")
 st.download_button(
     label="⬇  Download CSV",
     data=csv,
-    file_name=f"fcs_{res['model'].lower()}_simulation.csv",
+    file_name=f"fcs_{model.lower()}_simulation.csv",
     mime="text/csv",
 )

@@ -3,9 +3,7 @@
 Created on Wed Jun 10 11:27:19 2026
 
 """
-"""
-FCS Oligomerization Simulator 
-"""
+
 
 import numpy as np
 import streamlit as st

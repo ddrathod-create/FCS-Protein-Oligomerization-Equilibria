@@ -1,12 +1,7 @@
 # -*- coding: utf-8 -*-
 """
 Created on Wed Jun 10 11:27:19 2026
-
 """
-"""
-FCS Oligomerization Simulator 
-"""
-
 import numpy as np
 import streamlit as st
 import matplotlib.pyplot as plt
@@ -14,7 +9,7 @@ import matplotlib.ticker as ticker
 import pandas as pd
 
 st.set_page_config(
-    page_title="FCS Oligomerization Explorer",
+    page_title="Protein Oligomerization Simulator",
     page_icon="🔬",
     layout="wide",
 )
@@ -331,13 +326,13 @@ p, label, div, h1, h2, h3, h4, h5, h6,
 """, unsafe_allow_html=True)
 
 
-# ── Physics ─────────────────────────────────────────────────────────────────────
+# ── Equilibria Eqn ─────────────────────────────────────────────────────────────────────
 def dimer_equilibria(C2, KD, f, C_l):
     C = 2 * C2
     r2 = 0.79
     alpha1 = (1 / (C * 4)) * (-KD + np.sqrt(8 * C * KD + KD**2))
     alpha2 = 1 - alpha1
-    lf    = (2 * C_l * f) / C #labeled fraction
+    lf    = (2 * C_l * f) / C 
     c = 1 - 2 * (alpha1 / (1 + (1 - alpha1) * lf))
     tau_app = 0.5 * (c * (1 - r2) + np.sqrt(c**2 * (1 - r2)**2 + 4 * r2))
     return tau_app, alpha1, alpha2, np.zeros_like(alpha1), np.zeros_like(alpha1)
@@ -351,7 +346,7 @@ def trimer_equilibria(C3, KDE, f, C_l):
     f2 = (a1**(1/3)) / (2**(1/3) * C**2)
     alpha1 = (1/3) * (-f1 + f2)
     alpha3 = 1 - alpha1
-    lf    = (3 * C_l * f) / C #labeled fraction
+    lf    = (3 * C_l * f) / C 
     c = 1 - 2 * (alpha1 / (1 + (1 - alpha1) * (2 * lf)))
     tau_app = 0.5 * (c * (1 - r3) + np.sqrt(c**2 * (1 - r3)**2 + 4 * r3))
     return tau_app, alpha1, np.zeros_like(alpha1), alpha3, np.zeros_like(alpha1)
@@ -493,7 +488,7 @@ with st.sidebar:
     st.markdown(
         "<div class='label-row'>"
         "<span class='sidebar-label' style='margin-bottom:0;'>Equilibrium Model</span>"
-        "<span class='help-icon' title='Choose which oligomerization equilibrium to simulate: a simple dimer, trimer, or a tetramer that assembles via a dimer intermediate.'>?</span>"
+        "<span class='help-icon' title='Choose which oligomerization equilibrium to simulate: a dimer, trimer, or a tetramer that assembles via a dimer intermediate.'>?</span>"
         "</div>",
         unsafe_allow_html=True,
     )
@@ -508,7 +503,7 @@ with st.sidebar:
         with col_kd1:
             st.markdown(
                 "<div class='label-row'><span class='sidebar-input-label'>K<sub>d1</sub> (nM)</span>"
-                "<span class='help-icon' title='Dissociation constant for the dimer ⇌ tetramer step (nM). Lower values favor tetramer formation.'>?</span></div>",
+                "<span class='help-icon' title='Dissociation constant for the dimer ⇌ tetramer step (nM)'>?</span></div>",
                 unsafe_allow_html=True,
             )
             KD1 = st.number_input("Kd1", label_visibility="collapsed",
@@ -516,7 +511,7 @@ with st.sidebar:
         with col_kd2:
             st.markdown(
                 "<div class='label-row'><span class='sidebar-input-label'>K<sub>d2</sub> (nM)</span>"
-                "<span class='help-icon' title='Dissociation constant for the monomer ⇌ dimer step (nM). Lower values favor dimer formation.'>?</span></div>",
+                "<span class='help-icon' title='Dissociation constant for the monomer ⇌ dimer step (nM).'>?</span></div>",
                 unsafe_allow_html=True,
             )
             KD2 = st.number_input("Kd2", label_visibility="collapsed",
@@ -524,7 +519,7 @@ with st.sidebar:
     else:
         st.markdown(
             "<div class='label-row'><span class='sidebar-input-label'>K<sub>d</sub> (nM)</span>"
-            "<span class='help-icon' title='Dissociation constant for the monomer ⇌ oligomer equilibrium (nM). Lower values favor oligomer formation.'>?</span></div>",
+            "<span class='help-icon' title='Dissociation constant for the monomer ⇌ oligomer equilibrium (nM).'>?</span></div>",
             unsafe_allow_html=True,
         )
         KD1 = st.number_input("Kd", label_visibility="collapsed",
@@ -543,7 +538,7 @@ with st.sidebar:
     with col_cl:
         st.markdown(
             "<div class='label-row'><span class='sidebar-input-label'>C<sub>L</sub> (nM)</span>"
-            "<span class='help-icon' title='Concentration of labeled protein in the sample (nM).'>?</span></div>",
+            "<span class='help-icon' title='Concentration of labeled protein in terms of highest oligomer (nM).'>?</span></div>",
             unsafe_allow_html=True,
         )
         C_l = st.number_input("CL", label_visibility="collapsed",
@@ -553,7 +548,7 @@ with st.sidebar:
     st.markdown(
         "<div class='label-row'>"
         "<span class='sidebar-label' style='margin-bottom:0;'>Conc. Range (nM)</span>"
-        "<span class='help-icon' title='Range of total protein concentration to simulate (nM), shown on the log-scale x-axis of the plots.'>?</span>"
+        "<span class='help-icon' title='Range of total protein concentration to simulate (nM) in terms of highest oligomer, shown on the log-scale x-axis of the plots.'>?</span>"
         "</div>",
         unsafe_allow_html=True,
     )
@@ -572,8 +567,8 @@ with st.sidebar:
 st.markdown(
     "<div class='page-header'>"
     "<span class='page-icon'>🔬</span>"
-    "<span class='page-title'>FCS Oligomerization Explorer</span>"
-    "<div class='page-subtitle'>Apparent diffusion times across self-association equilibria</div>"
+    "<span class='page-title'>Protein Oligomerization Simulator</span>"
+    "<div class='page-subtitle'>FCS-based simulation of oligomer equilibria</div>"
     "</div>",
     unsafe_allow_html=True,
 )

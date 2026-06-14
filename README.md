@@ -15,20 +15,31 @@ This tool computes and displays the predicted **normalized apparent diffusion ti
 
 ---
 
+## Original Code
+
+This webapp is based on the `<filename>.py` file, maintaining all the original functionality while adding an interactive web interface.
+
+---
+
 ## The Three Equilibrium Cases
 
 **Monomer–Dimer** — monomer fraction solved in closed form:
 
-$$2\mathrm{M} \underset{K_d}{\rightleftharpoons} \mathrm{D}$$
+```
+2M ⇌ D        (Kd)
+```
 
-**Monomer–Trimer** — monomer fraction from roots of a cubic equation; $K_d$ here is an effective dissociation constant derived from a per-step equilibrium constant $K_{d,\mathrm{E}}$:
+**Monomer–Trimer** — monomer fraction from roots of a cubic equation; *K*_d here is an effective dissociation constant derived from a per-step equilibrium constant *K*_d,E:
 
-$$3\mathrm{M} \underset{K_d^{\mathrm{eff}}}{\rightleftharpoons} \mathrm{T}$$
+```
+3M ⇌ T        (Kd_eff)
+```
 
 **Monomer–Dimer–Tetramer** — sequential two-step assembly via a dimeric intermediate; species fractions from roots of a quartic, apparent diffusion time from roots of a cubic:
 
-$$2\mathrm{M} \underset{K_{d2}}{\rightleftharpoons} \mathrm{D} \underset{K_{d1}}{\rightleftharpoons} \mathrm{T_4}$$
-
+```
+2M ⇌ D ⇌ T₄        (Kd2 for M→D step, Kd1 for D→T₄ step)
+```
 
 ---
 
@@ -97,12 +108,11 @@ The app will open automatically in your browser at `http://localhost:8501`.
 
 ## References
 
-1. **[Author(s), Title, Journal, Year, DOI -- placeholder]**
-   
+1. **[Author(s), Title, Journal, Year, DOI — placeholder]**
 
-2. Kanno, D. M., & Levitus, M. (2014). Protein oligomerization equilibria and kinetics investigated 
-      by fluorescence correlation spectroscopy: A mathematical treatment. 
-      The Journal of Physical Chemistry B, 118(43), 12404–12415. https://doi.org/10.1021/jp507741r 
+2. Kanno, D. M., & Levitus, M. (2014). Protein oligomerization equilibria and kinetics investigated
+   by fluorescence correlation spectroscopy: A mathematical treatment.
+   *The Journal of Physical Chemistry B*, 118(43), 12404–12415. https://doi.org/10.1021/jp507741r
 
 ---
 

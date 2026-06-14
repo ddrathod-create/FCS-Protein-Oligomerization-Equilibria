@@ -19,7 +19,7 @@ This tool is based on a rigorous mathematical treatment that establishes analyti
 
 ## Original Code
 
-This webapp is based on the `<filename>.py` file, maintaining all the original functionality while adding an interactive web interface.
+This webapp is based on the `proteinequilibriafn.py` file, maintaining all the original functionality while adding an interactive web interface.
 
 ---
 

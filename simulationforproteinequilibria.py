@@ -329,7 +329,7 @@ div.stButton > button:active { background-color: #9900aa !important; }
 }
 .page-subtitle {
     font-family: 'Plus Jakarta Sans', sans-serif;
-    font-size: 0.9rem;
+    font-size: 0.92rem;
     color: #7070a0 !important;
     margin-top: 6px;
     font-weight: 400;
@@ -547,6 +547,15 @@ with st.sidebar:
         st.markdown(label_row("K<sub>d2</sub> (nM)", "Dissociation constant for the monomer ⇌ dimer step (nM)."), unsafe_allow_html=True)
         KD2 = st.number_input("Kd2", label_visibility="collapsed",
                                min_value=1e-6, max_value=1e9, value=10.0, step=10.0, format="%.4g")
+    elif model == "Trimer":
+        st.markdown(label_row(
+            "K<sub>d</sub><sup>E</sup> (nM)",
+            "Effective dissociation constant for the trimer ⇌ monomer equilibrium (nM). "
+            "Related to the microscopic Kd by: Kd\u1d31 = (2/\u221a3) \u00d7 \u221aKd"
+        ), unsafe_allow_html=True)
+        KD1 = st.number_input("Kd", label_visibility="collapsed",
+                               min_value=1e-6, max_value=1e9, value=100.0, step=10.0, format="%.4g")
+        KD2 = None
     else:
         st.markdown(label_row("K<sub>d</sub> (nM)", "Dissociation constant for the monomer ⇌ oligomer equilibrium (nM)."), unsafe_allow_html=True)
         KD1 = st.number_input("Kd", label_visibility="collapsed",

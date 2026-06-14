@@ -153,6 +153,7 @@ section[data-testid="stSidebar"] input {
     font-size: 1.05rem !important;
     padding: 0.55rem 0.6rem !important;
 }
+/* ── Selectbox outer container ── */
 section[data-testid="stSidebar"] [data-testid="stSelectbox"] > div > div {
     background-color: #1e1e35 !important;
     color: #e0e0e0 !important;
@@ -160,21 +161,33 @@ section[data-testid="stSidebar"] [data-testid="stSelectbox"] > div > div {
     border-radius: 6px !important;
     font-size: 0.95rem !important;
 }
-/* Remove inner box artifact inside selectbox */
-section[data-testid="stSidebar"] [data-testid="stSelectbox"] > div > div > div {
-    background-color: transparent !important;
+/* Kill the inner white/light box that Streamlit renders inside the select */
+section[data-testid="stSidebar"] [data-baseweb="select"] {
+    background-color: #1e1e35 !important;
+    border: 1px solid #3a3a5c !important;
+    border-radius: 6px !important;
+}
+section[data-testid="stSidebar"] [data-baseweb="select"] > div,
+section[data-testid="stSidebar"] [data-baseweb="select"] > div > div {
+    background-color: #1e1e35 !important;
     border: none !important;
     box-shadow: none !important;
+    outline: none !important;
+}
+/* ── Number input +/- buttons — always visible ── */
+section[data-testid="stSidebar"] [data-testid="stNumberInput"] {
+    display: flex !important;
 }
 section[data-testid="stSidebar"] [data-testid="stNumberInput"] button {
     background-color: #2a2a45 !important;
     border: none !important;
     border-radius: 4px !important;
-    display: inline-flex !important;
+    display: flex !important;
     visibility: visible !important;
     opacity: 1 !important;
-    width: auto !important;
-    min-width: 28px !important;
+    flex-shrink: 0 !important;
+    min-width: 32px !important;
+    min-height: 32px !important;
 }
 section[data-testid="stSidebar"] [data-testid="stNumberInput"] button svg,
 section[data-testid="stSidebar"] [data-testid="stNumberInput"] button svg path {
@@ -183,8 +196,8 @@ section[data-testid="stSidebar"] [data-testid="stNumberInput"] button svg path {
 section[data-testid="stSidebar"] [data-testid="stNumberInput"] button:hover {
     background-color: #e040fb !important;
 }
-/* Tighten Min/Max label-to-input spacing */
-section[data-testid="stSidebar"] .stMarkdown:has(span.sidebar-input-label) {
+/* Tighten all label-to-input spacing */
+section[data-testid="stSidebar"] .stMarkdown {
     margin-bottom: 1px !important;
 }
 
@@ -523,30 +536,24 @@ with st.sidebar:
     st.markdown("<span class='sidebar-label'>Model Parameters</span>", unsafe_allow_html=True)
 
     if model == "Tetramer":
-        col_kd1, col_kd2 = st.columns(2)
-        with col_kd1:
-            st.markdown(label_row("K<sub>d1</sub> (nM)", "Dissociation constant for the dimer ⇌ tetramer step (nM)."), unsafe_allow_html=True)
-            KD1 = st.number_input("Kd1", label_visibility="collapsed",
-                                   min_value=1e-6, max_value=1e9, value=100.0, step=10.0, format="%.4g")
-        with col_kd2:
-            st.markdown(label_row("K<sub>d2</sub> (nM)", "Dissociation constant for the monomer ⇌ dimer step (nM)."), unsafe_allow_html=True)
-            KD2 = st.number_input("Kd2", label_visibility="collapsed",
-                                   min_value=1e-6, max_value=1e9, value=10.0, step=10.0, format="%.4g")
+        st.markdown(label_row("K<sub>d1</sub> (nM)", "Dissociation constant for the dimer ⇌ tetramer step (nM)."), unsafe_allow_html=True)
+        KD1 = st.number_input("Kd1", label_visibility="collapsed",
+                               min_value=1e-6, max_value=1e9, value=100.0, step=10.0, format="%.4g")
+        st.markdown(label_row("K<sub>d2</sub> (nM)", "Dissociation constant for the monomer ⇌ dimer step (nM)."), unsafe_allow_html=True)
+        KD2 = st.number_input("Kd2", label_visibility="collapsed",
+                               min_value=1e-6, max_value=1e9, value=10.0, step=10.0, format="%.4g")
     else:
         st.markdown(label_row("K<sub>d</sub> (nM)", "Dissociation constant for the monomer ⇌ oligomer equilibrium (nM)."), unsafe_allow_html=True)
         KD1 = st.number_input("Kd", label_visibility="collapsed",
                                min_value=1e-6, max_value=1e9, value=100.0, step=10.0, format="%.4g")
         KD2 = None
 
-    col_f, col_cl = st.columns(2)
-    with col_f:
-        st.markdown(label_row("f", "Labelling efficiency (0–1): fraction of protein molecules carrying a fluorescent label."), unsafe_allow_html=True)
-        f = st.number_input("f", label_visibility="collapsed",
-                            min_value=0.0, max_value=1.0, value=0.5, step=0.05, format="%.2f")
-    with col_cl:
-        st.markdown(label_row("C<sub>L</sub> (nM)", "Concentration of labeled protein in terms of highest oligomer (nM)."), unsafe_allow_html=True)
-        C_l = st.number_input("CL", label_visibility="collapsed",
-                               min_value=0.0, max_value=1e6, value=1.0, step=0.1, format="%.4g")
+    st.markdown(label_row("f", "Labelling efficiency (0–1): fraction of protein molecules carrying a fluorescent label."), unsafe_allow_html=True)
+    f = st.number_input("f", label_visibility="collapsed",
+                        min_value=0.0, max_value=1.0, value=0.5, step=0.05, format="%.2f")
+    st.markdown(label_row("C<sub>L</sub> (nM)", "Concentration of labeled protein in terms of highest oligomer (nM)."), unsafe_allow_html=True)
+    C_l = st.number_input("CL", label_visibility="collapsed",
+                           min_value=0.0, max_value=1e6, value=1.0, step=0.1, format="%.4g")
 
     st.divider()
     st.markdown(

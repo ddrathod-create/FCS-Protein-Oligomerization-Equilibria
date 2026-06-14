@@ -64,13 +64,18 @@ The tool outputs:
  
 ## Installation
  
+**1. Install dependencies**
 ```bash
 pip install streamlit numpy matplotlib pandas
+```
+ 
+**2. Run the app**
+```bash
 streamlit run simulationforproteinequilibria.py
 ```
  
 The app will open automatically in your browser at `http://localhost:8501`.
- 
+  
 ---
 
 ## Usage

@@ -160,10 +160,21 @@ section[data-testid="stSidebar"] [data-testid="stSelectbox"] > div > div {
     border-radius: 6px !important;
     font-size: 0.95rem !important;
 }
+/* Remove inner box artifact inside selectbox */
+section[data-testid="stSidebar"] [data-testid="stSelectbox"] > div > div > div {
+    background-color: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+}
 section[data-testid="stSidebar"] [data-testid="stNumberInput"] button {
     background-color: #2a2a45 !important;
     border: none !important;
     border-radius: 4px !important;
+    display: inline-flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    width: auto !important;
+    min-width: 28px !important;
 }
 section[data-testid="stSidebar"] [data-testid="stNumberInput"] button svg,
 section[data-testid="stSidebar"] [data-testid="stNumberInput"] button svg path {
@@ -171,6 +182,10 @@ section[data-testid="stSidebar"] [data-testid="stNumberInput"] button svg path {
 }
 section[data-testid="stSidebar"] [data-testid="stNumberInput"] button:hover {
     background-color: #e040fb !important;
+}
+/* Tighten Min/Max label-to-input spacing */
+section[data-testid="stSidebar"] .stMarkdown:has(span.sidebar-input-label) {
+    margin-bottom: 1px !important;
 }
 
 /* ── Dropdown popup ── */
@@ -543,11 +558,11 @@ with st.sidebar:
     )
     col_lo, col_hi = st.columns(2)
     with col_lo:
-        st.markdown("<span class='sidebar-input-label'>Min</span>", unsafe_allow_html=True)
+        st.markdown("<span class='sidebar-input-label' style='margin-bottom:1px;display:block;'>Min</span>", unsafe_allow_html=True)
         c_min = st.number_input("Min", label_visibility="collapsed",
                                  min_value=1e-6, max_value=1e6, value=1.0, step=1.0, format="%.4g")
     with col_hi:
-        st.markdown("<span class='sidebar-input-label'>Max</span>", unsafe_allow_html=True)
+        st.markdown("<span class='sidebar-input-label' style='margin-bottom:1px;display:block;'>Max</span>", unsafe_allow_html=True)
         c_max = st.number_input("Max", label_visibility="collapsed",
                                  min_value=1e-6, max_value=1e9, value=1000.0, step=100.0, format="%.4g")
 

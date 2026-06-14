@@ -221,7 +221,7 @@ li[role="option"][aria-selected="true"] {
 
 /* ── Sidebar section labels ── */
 .sidebar-label {
-    font-size: 0.78rem;
+    font-size: 0.72rem;
     letter-spacing: 0.13em;
     color: #7070a0 !important;
     font-weight: 700;
@@ -232,7 +232,7 @@ li[role="option"][aria-selected="true"] {
 }
 /* ── Parameter input labels ── */
 .sidebar-input-label {
-    font-size: 1.0rem !important;
+    font-size: 0.85rem !important;
     font-weight: 400 !important;
     color: #a0a0c8 !important;
     display: block;

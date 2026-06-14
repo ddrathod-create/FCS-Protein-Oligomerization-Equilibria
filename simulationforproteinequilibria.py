@@ -551,7 +551,7 @@ with st.sidebar:
         st.markdown(label_row(
             "K<sub>d</sub><sup>E</sup> (nM)",
             "Effective dissociation constant for the trimer ⇌ monomer equilibrium (nM). "
-            "Related to the microscopic Kd by: Kd\u1d31 = (2/\u221a3) \u00d7 \u221aKd"
+            "Kd\u1d31 = (2/\u221a3) \u00d7 \u221aKd"
         ), unsafe_allow_html=True)
         KD1 = st.number_input("Kd", label_visibility="collapsed",
                                min_value=1e-6, max_value=1e9, value=100.0, step=10.0, format="%.4g")

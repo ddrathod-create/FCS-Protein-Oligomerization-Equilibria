@@ -200,6 +200,11 @@ section[data-testid="stSidebar"] [data-testid="stNumberInput"] button:hover {
 section[data-testid="stSidebar"] .stMarkdown {
     margin-bottom: 1px !important;
 }
+/* Pull number inputs up tight after their label */
+section[data-testid="stSidebar"] .stNumberInput {
+    margin-top: -6px !important;
+    margin-bottom: 10px !important;
+}
 
 /* ── Dropdown popup ── */
 [data-baseweb="popover"], [data-baseweb="popover"] *,
@@ -218,7 +223,6 @@ li[role="option"][aria-selected="true"] {
 .sidebar-label {
     font-size: 0.78rem;
     letter-spacing: 0.13em;
-    text-transform: uppercase;
     color: #7070a0 !important;
     font-weight: 700;
     margin-bottom: 6px;
@@ -228,13 +232,14 @@ li[role="option"][aria-selected="true"] {
 }
 /* ── Parameter input labels ── */
 .sidebar-input-label {
-    font-size: 0.92rem !important;
+    font-size: 1.0rem !important;
     font-weight: 400 !important;
     color: #a0a0c8 !important;
     display: block;
     font-family: 'Plus Jakarta Sans', sans-serif !important;
     line-height: 1.4;
     letter-spacing: 0.01em;
+    margin-bottom: 0px !important;
 }
 .label-row {
     display: flex;
@@ -524,7 +529,7 @@ with st.sidebar:
 
     st.markdown(
         "<div class='label-row'>"
-        "<span class='sidebar-label' style='margin-bottom:0;'>Equilibrium Model</span>"
+        "<span class='sidebar-label' style='margin-bottom:0;'>EQUILIBRIUM MODEL</span>"
         "<span class='help-icon' title='Choose which oligomerization equilibrium to simulate: a dimer, trimer, or a tetramer that assembles via a dimer intermediate.'>?</span>"
         "</div>",
         unsafe_allow_html=True,
@@ -533,7 +538,7 @@ with st.sidebar:
     model = [k for k, v in EQ_LABELS.items() if v == model_label][0]
 
     st.divider()
-    st.markdown("<span class='sidebar-label'>Model Parameters</span>", unsafe_allow_html=True)
+    st.markdown("<span class='sidebar-label'>MODEL PARAMETERS</span>", unsafe_allow_html=True)
 
     if model == "Tetramer":
         st.markdown(label_row("K<sub>d1</sub> (nM)", "Dissociation constant for the dimer ⇌ tetramer step (nM)."), unsafe_allow_html=True)
@@ -558,18 +563,18 @@ with st.sidebar:
     st.divider()
     st.markdown(
         "<div class='label-row'>"
-        "<span class='sidebar-label' style='margin-bottom:0;'>Conc. Range (nM)</span>"
+        "<span class='sidebar-label' style='margin-bottom:0;'>CONC. RANGE (nM)</span>"
         "<span class='help-icon' title='Range of total protein concentration to simulate (nM) in terms of highest oligomer, shown on the log-scale x-axis of the plots.'>?</span>"
         "</div>",
         unsafe_allow_html=True,
     )
     col_lo, col_hi = st.columns(2)
     with col_lo:
-        st.markdown("<span class='sidebar-input-label' style='margin-bottom:1px;display:block;'>Min</span>", unsafe_allow_html=True)
+        st.markdown("<span class='sidebar-input-label'>Min</span>", unsafe_allow_html=True)
         c_min = st.number_input("Min", label_visibility="collapsed",
                                  min_value=1e-6, max_value=1e6, value=1.0, step=1.0, format="%.4g")
     with col_hi:
-        st.markdown("<span class='sidebar-input-label' style='margin-bottom:1px;display:block;'>Max</span>", unsafe_allow_html=True)
+        st.markdown("<span class='sidebar-input-label'>Max</span>", unsafe_allow_html=True)
         c_max = st.number_input("Max", label_visibility="collapsed",
                                  min_value=1e-6, max_value=1e9, value=1000.0, step=100.0, format="%.4g")
 

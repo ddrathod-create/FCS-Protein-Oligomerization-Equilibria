@@ -150,7 +150,7 @@ section[data-testid="stSidebar"] input {
     color: #e0e0e0 !important;
     border: 1px solid #3a3a5c !important;
     border-radius: 6px !important;
-    font-size: 0.78rem !important;
+    font-size: 0.82rem !important;
     padding: 0.55rem 0.6rem !important;
 }
 /* ── Selectbox outer container ── */
@@ -232,7 +232,7 @@ li[role="option"][aria-selected="true"] {
 }
 /* ── Parameter input labels ── */
 .sidebar-input-label {
-    font-size: 0.82rem !important;
+    font-size: 0.88rem !important;
     font-weight: 400 !important;
     color: #a0a0c8 !important;
     display: block;

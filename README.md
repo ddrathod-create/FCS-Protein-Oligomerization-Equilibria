@@ -62,38 +62,16 @@ The tool outputs:
 - **CSV download:** All plotted values for downstream analysis
 
 ---
-
+ 
 ## Installation
-
-### Requirements
-
-- Python ≥ 3.9
-- pip
-
-### Setup
-
+ 
 ```bash
-# 1. Clone the repository
-git clone https://github.com/<your-username>/<your-repo>.git
-cd <your-repo>
-
-# 2. (Recommended) Create a virtual environment
-python -m venv venv
-source venv/bin/activate        # macOS / Linux
-venv\Scripts\activate           # Windows
-
-# 3. Install dependencies
 pip install streamlit numpy matplotlib pandas
+streamlit run simulationforproteinequilibria.py
 ```
-
-### Run locally
-
-```bash
-streamlit run app.py
-```
-
+ 
 The app will open automatically in your browser at `http://localhost:8501`.
-
+ 
 ---
 
 ## Usage

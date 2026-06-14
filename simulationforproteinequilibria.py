@@ -85,7 +85,7 @@ header[data-testid="stHeader"] {
     fill: #e040fb !important;
 }
 
-/* ── Hide sidebar collapse toggle (fixes "keyboard_double" text leak) ── */
+/* ── Hide sidebar collapse toggle ── */
 [data-testid="stSidebarCollapsedControl"],
 [data-testid="stSidebarCollapseButton"],
 [data-testid="collapsedControl"],
@@ -106,7 +106,7 @@ button[aria-label*="Collapse"] {
     border: none !important;
 }
 
-/* ── Hide deploy button (white square) only ── */
+/* ── Hide deploy button ── */
 [data-testid="stAppDeployButton"],
 [data-testid="stAppDeployButton"] *,
 [data-testid="stDeployButton"],
@@ -136,27 +136,29 @@ section[data-testid="stSidebar"] span {
 }
 section[data-testid="stSidebar"] hr {
     border-color: #2a2a3e !important;
-    margin: 10px 0 !important;
+    margin: 12px 0 !important;
 }
 section[data-testid="stSidebar"] .stMarkdown {
-    margin-bottom: 2px !important;
+    margin-bottom: 3px !important;
 }
-section[data-testid="stSidebar"] .stSelectbox  { margin-bottom: 8px !important; }
-section[data-testid="stSidebar"] .stNumberInput { margin-bottom: 8px !important; }
+section[data-testid="stSidebar"] .stSelectbox  { margin-bottom: 10px !important; }
+section[data-testid="stSidebar"] .stNumberInput { margin-bottom: 10px !important; }
 
-
-/* Sidebar inputs */
+/* Sidebar inputs — taller, bigger text */
 section[data-testid="stSidebar"] input {
     background-color: #1e1e35 !important;
     color: #e0e0e0 !important;
     border: 1px solid #3a3a5c !important;
     border-radius: 6px !important;
+    font-size: 1.05rem !important;
+    padding: 0.55rem 0.6rem !important;
 }
 section[data-testid="stSidebar"] [data-testid="stSelectbox"] > div > div {
     background-color: #1e1e35 !important;
     color: #e0e0e0 !important;
     border: 1px solid #3a3a5c !important;
     border-radius: 6px !important;
+    font-size: 0.95rem !important;
 }
 section[data-testid="stSidebar"] [data-testid="stNumberInput"] button {
     background-color: #2a2a45 !important;
@@ -170,7 +172,6 @@ section[data-testid="stSidebar"] [data-testid="stNumberInput"] button svg path {
 section[data-testid="stSidebar"] [data-testid="stNumberInput"] button:hover {
     background-color: #e040fb !important;
 }
-
 
 /* ── Dropdown popup ── */
 [data-baseweb="popover"], [data-baseweb="popover"] *,
@@ -187,8 +188,8 @@ li[role="option"][aria-selected="true"] {
 
 /* ── Sidebar section labels ── */
 .sidebar-label {
-    font-size: 0.95rem;
-    letter-spacing: 0.12em;
+    font-size: 0.78rem;
+    letter-spacing: 0.13em;
     text-transform: uppercase;
     color: #7070a0 !important;
     font-weight: 700;
@@ -197,25 +198,28 @@ li[role="option"][aria-selected="true"] {
     display: block;
     font-family: 'Plus Jakarta Sans', sans-serif !important;
 }
+/* ── Parameter input labels — bigger & clearer ── */
 .sidebar-input-label {
-    font-size: 0.82rem;
-    color: #b0b0cc !important;
+    font-size: 0.95rem !important;
+    font-weight: 600 !important;
+    color: #d0d0e8 !important;
     display: block;
     font-family: 'Plus Jakarta Sans', sans-serif !important;
+    line-height: 1.3;
 }
 .label-row {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 2px;
+    margin-bottom: 3px;
 }
 .help-icon {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 15px;
-    height: 15px;
-    min-width: 15px;
+    width: 16px;
+    height: 16px;
+    min-width: 16px;
     border-radius: 50%;
     border: 1px solid #5a5a7c;
     color: #8888b0;
@@ -223,7 +227,7 @@ li[role="option"][aria-selected="true"] {
     font-weight: 600;
     cursor: help;
     flex-shrink: 0;
-    margin-left: 8px;
+    margin-left: 6px;
 }
 .help-icon:hover {
     border-color: #e040fb;
@@ -322,7 +326,6 @@ p, label, div, h1, h2, h3, h4, h5, h6,
 /* Hide docstring */
 [data-testid="stText"] { display: none; }
 </style>
-
 """, unsafe_allow_html=True)
 
 
@@ -332,7 +335,7 @@ def dimer_equilibria(C2, KD, f, C_l):
     r2 = 0.79
     alpha1 = (1 / (C * 4)) * (-KD + np.sqrt(8 * C * KD + KD**2))
     alpha2 = 1 - alpha1
-    lf    = (2 * C_l * f) / C 
+    lf    = (2 * C_l * f) / C
     c = 1 - 2 * (alpha1 / (1 + (1 - alpha1) * lf))
     tau_app = 0.5 * (c * (1 - r2) + np.sqrt(c**2 * (1 - r2)**2 + 4 * r2))
     return tau_app, alpha1, alpha2, np.zeros_like(alpha1), np.zeros_like(alpha1)
@@ -346,7 +349,7 @@ def trimer_equilibria(C3, KDE, f, C_l):
     f2 = (a1**(1/3)) / (2**(1/3) * C**2)
     alpha1 = (1/3) * (-f1 + f2)
     alpha3 = 1 - alpha1
-    lf    = (3 * C_l * f) / C 
+    lf    = (3 * C_l * f) / C
     c = 1 - 2 * (alpha1 / (1 + (1 - alpha1) * (2 * lf)))
     tau_app = 0.5 * (c * (1 - r3) + np.sqrt(c**2 * (1 - r3)**2 + 4 * r3))
     return tau_app, alpha1, np.zeros_like(alpha1), alpha3, np.zeros_like(alpha1)
@@ -424,7 +427,6 @@ def make_figure(C, tau, species, model):
                 sp.set_linewidth(0.8)
             ax.grid(True, color="#2a2a4a", linewidth=0.6, linestyle="--")
 
-        # tau panel
         style_ax(ax_tau)
         ax_tau.plot(C, tau, color="#e040fb", linewidth=2.2, solid_capstyle="round")
         ax_tau.set_xscale("log")
@@ -438,7 +440,6 @@ def make_figure(C, tau, species, model):
         ax_tau.set_ylim(tau_lo, 1.05)
         ax_tau.tick_params(axis="y", colors="#ccccdd", labelsize=8)
 
-        # twin top axis
         ax2x = ax_tau.twiny()
         ax2x.set_xscale("log")
         ax2x.set_xlim(C[0], C[-1])
@@ -454,7 +455,6 @@ def make_figure(C, tau, species, model):
         for sp_name in ("bottom", "left", "right"):
             ax2x.spines[sp_name].set_color("#5a5a7c")
 
-        # fraction panel
         style_ax(ax_frac)
         for name, frac in species.items():
             ax_frac.plot(C, frac, color=species_colors.get(name, "#aaaaaa"),
@@ -481,6 +481,14 @@ EQ_LABELS = {
     "Tetramer": "Tetramer ⇌ Dimer ⇌ Monomer",
 }
 
+def label_row(text, tooltip):
+    return (
+        f"<div class='label-row'>"
+        f"<span class='sidebar-input-label'>{text}</span>"
+        f"<span class='help-icon' title='{tooltip}'>?</span>"
+        f"</div>"
+    )
+
 with st.sidebar:
     run_btn = st.button("▶  Run Simulation", use_container_width=True)
     st.divider()
@@ -501,46 +509,26 @@ with st.sidebar:
     if model == "Tetramer":
         col_kd1, col_kd2 = st.columns(2)
         with col_kd1:
-            st.markdown(
-                "<div class='label-row'><span class='sidebar-input-label'>K<sub>d1</sub> (nM)</span>"
-                "<span class='help-icon' title='Dissociation constant for the dimer ⇌ tetramer step (nM)'>?</span></div>",
-                unsafe_allow_html=True,
-            )
+            st.markdown(label_row("K<sub>d1</sub> (nM)", "Dissociation constant for the dimer ⇌ tetramer step (nM)."), unsafe_allow_html=True)
             KD1 = st.number_input("Kd1", label_visibility="collapsed",
                                    min_value=1e-6, max_value=1e9, value=100.0, step=10.0, format="%.4g")
         with col_kd2:
-            st.markdown(
-                "<div class='label-row'><span class='sidebar-input-label'>K<sub>d2</sub> (nM)</span>"
-                "<span class='help-icon' title='Dissociation constant for the monomer ⇌ dimer step (nM).'>?</span></div>",
-                unsafe_allow_html=True,
-            )
+            st.markdown(label_row("K<sub>d2</sub> (nM)", "Dissociation constant for the monomer ⇌ dimer step (nM)."), unsafe_allow_html=True)
             KD2 = st.number_input("Kd2", label_visibility="collapsed",
                                    min_value=1e-6, max_value=1e9, value=10.0, step=10.0, format="%.4g")
     else:
-        st.markdown(
-            "<div class='label-row'><span class='sidebar-input-label'>K<sub>d</sub> (nM)</span>"
-            "<span class='help-icon' title='Dissociation constant for the monomer ⇌ oligomer equilibrium (nM).'>?</span></div>",
-            unsafe_allow_html=True,
-        )
+        st.markdown(label_row("K<sub>d</sub> (nM)", "Dissociation constant for the monomer ⇌ oligomer equilibrium (nM)."), unsafe_allow_html=True)
         KD1 = st.number_input("Kd", label_visibility="collapsed",
                                min_value=1e-6, max_value=1e9, value=100.0, step=10.0, format="%.4g")
         KD2 = None
 
     col_f, col_cl = st.columns(2)
     with col_f:
-        st.markdown(
-            "<div class='label-row'><span class='sidebar-input-label'>Label. eff. f</span>"
-            "<span class='help-icon' title='Labelling efficiency (0–1): the fraction of protein molecules carrying a fluorescent label.'>?</span></div>",
-            unsafe_allow_html=True,
-        )
+        st.markdown(label_row("f", "Labelling efficiency (0–1): fraction of protein molecules carrying a fluorescent label."), unsafe_allow_html=True)
         f = st.number_input("f", label_visibility="collapsed",
                             min_value=0.0, max_value=1.0, value=0.5, step=0.05, format="%.2f")
     with col_cl:
-        st.markdown(
-            "<div class='label-row'><span class='sidebar-input-label'>C<sub>L</sub> (nM)</span>"
-            "<span class='help-icon' title='Concentration of labeled protein in terms of highest oligomer (nM).'>?</span></div>",
-            unsafe_allow_html=True,
-        )
+        st.markdown(label_row("C<sub>L</sub> (nM)", "Concentration of labeled protein in terms of highest oligomer (nM)."), unsafe_allow_html=True)
         C_l = st.number_input("CL", label_visibility="collapsed",
                                min_value=0.0, max_value=1e6, value=1.0, step=0.1, format="%.4g")
 
@@ -606,14 +594,12 @@ if st.session_state["last_result"] is None or model_changed or run_btn:
 res = st.session_state["last_result"]
 C, tau, species, model_used = res["C"], res["tau"], res["species"], res["model"]
 
-# Section heading
 st.markdown(f"<div class='section-heading'>{EQ_LABELS[model_used]}</div>", unsafe_allow_html=True)
 
 fig = make_figure(C, tau, species, model_used)
 st.pyplot(fig, use_container_width=True)
 plt.close(fig)
 
-# Download
 df_data = {"Concentration (nM)": C, "tau_app": tau}
 df_data.update(species)
 df = pd.DataFrame(df_data)

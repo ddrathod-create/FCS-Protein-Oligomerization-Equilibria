@@ -318,13 +318,13 @@ section[data-testid="stSidebar"] .element-container:has(> .stMarkdown .katex-dis
 .param-symbol sup {
     color: #f2f2f9 !important;
     font-weight: 400 !important;
-    font-size: 1.05rem !important;
+    font-size: 1.00rem !important;
     font-family: 'Plus Jakarta Sans', sans-serif !important;
 }
 .param-unit {
     color: #f2f2f9 !important;
     font-weight: 400 !important;
-    font-size: 1.05rem !important;
+    font-size: 1.00rem !important;
 }
 
 /* ── Run button ── */
@@ -643,7 +643,7 @@ with st.sidebar:
             "<span class='sidebar-input-label'>"
             "<span class='param-symbol'>K<sub>d</sub></span> <span class='param-unit'>(nM)</span>"
             "</span>"
-            "<span class='eq-caption'>dissociation constant, dimer ⇌ monomer equilibrium</span>"
+            "<span class='eq-caption'>equilibrium dissociation constant</span>"
             "</div>", unsafe_allow_html=True)
         KD1 = st.number_input("Kd", label_visibility="collapsed",
                                min_value=1e-6, max_value=1e9, value=100.0, step=10.0, format="%.4g")
@@ -653,7 +653,7 @@ with st.sidebar:
     st.markdown(
         "<div class='param-row'>"
         "<span class='sidebar-input-label'><span class='param-symbol'>f</span></span>"
-        "<span class='eq-caption'>labeling efficiency</span>"
+        "<span class='eq-caption'>(labeling efficiency)</span>"
         "</div>",
         unsafe_allow_html=True)
     f = st.number_input("f", label_visibility="collapsed",
@@ -664,7 +664,7 @@ with st.sidebar:
         "<span class='sidebar-input-label'>"
         "<span class='param-symbol'>C\u0303<sub>L</sub></span> <span class='param-unit'>(nM)</span>"
         "</span>"
-        f"<span class='eq-caption'>labeled protein concentration (as {unit_word})</span>"
+        f"<span class='eq-caption'>(labeled protein concentration as {unit_word})</span>"
         "</div>", unsafe_allow_html=True)
     C_l = st.number_input("CL", label_visibility="collapsed",
                            min_value=0.0, max_value=1e6, value=1.0, step=0.1, format="%.4g")
@@ -688,7 +688,7 @@ with st.sidebar:
 st.markdown(
     "<div class='page-header'>"
     "<span class='page-icon'>🔬</span>"
-    "<span class='page-title'>Protein Oligomerization Simulator</span>"
+    "<span class='page-title'>FCS-Protein Oligomerization Simulator</span>"
     "<div class='page-subtitle'>FCS-based simulation of oligomer equilibria</div>"
     "</div>",
     unsafe_allow_html=True,

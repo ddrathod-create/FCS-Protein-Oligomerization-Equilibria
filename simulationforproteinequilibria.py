@@ -311,6 +311,11 @@ section[data-testid="stSidebar"] .element-container:has(> .stMarkdown .katex-dis
     margin: 0 !important;
     display: inline;
 }
+/* ── Tighter gap for the CONC. RANGE header + caption ── */
+.section-tight-caption {
+    margin-top: -2px !important;
+    margin-bottom: 8px !important;
+}
 
 /* ── Parameter symbols (Kd, f, C̃L) — bold, uniform off-white, incl. sub/sup ── */
 .param-symbol,
@@ -668,11 +673,12 @@ with st.sidebar:
         "</div>", unsafe_allow_html=True)
     C_l = st.number_input("CL", label_visibility="collapsed",
                            min_value=0.0, max_value=1e6, value=1.0, step=0.1, format="%.4g")
-    
 
     st.divider()
-    st.markdown("<span class='sidebar-label' style='margin-bottom:0;'>CONC. RANGE (nM)</span>", unsafe_allow_html=True)
-    st.markdown(f"<span class='eq-caption' style='margin-top:0px;'>(total protein concentration range as {unit_word})</span>", unsafe_allow_html=True)
+    st.markdown(
+        "<span class='sidebar-label' style='margin-bottom:0;'>CONC. RANGE (nM)</span>"
+        f"<span class='eq-caption section-tight-caption'>(total protein concentration range as {unit_word})</span>",
+        unsafe_allow_html=True)
     col_lo, col_hi = st.columns(2)
     with col_lo:
         st.markdown("<span class='sidebar-input-label'>Min</span>", unsafe_allow_html=True)

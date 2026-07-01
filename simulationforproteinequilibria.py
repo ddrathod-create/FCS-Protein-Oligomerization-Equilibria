@@ -274,11 +274,15 @@ section[data-testid="stSidebar"] .katex * {
     color: #e0c3fa !important;
 }
 section[data-testid="stSidebar"] .katex {
-    font-size: 1.15rem !important;
+    font-size: 1.35rem !important;
 }
 section[data-testid="stSidebar"] .katex-display {
-    margin: 2px 0 12px 0 !important;
+    margin: 8px 0 14px 0 !important;
     text-align: left !important;
+}
+/* Tighten the gap Streamlit adds between two stacked st.latex() blocks */
+section[data-testid="stSidebar"] .element-container:has(> .stMarkdown .katex-display) + .element-container:has(> .stMarkdown .katex-display) {
+    margin-top: -10px !important;
 }
 .eq-caption {
     font-size: 0.92rem !important;
@@ -286,7 +290,7 @@ section[data-testid="stSidebar"] .katex-display {
     color: #9494c0 !important;
     font-style: italic;
     display: block;
-    margin: -2px 0 8px 2px !important;
+    margin: 4px 0 10px 2px !important;
     font-family: 'Plus Jakarta Sans', sans-serif !important;
 }
 
@@ -296,12 +300,13 @@ section[data-testid="stSidebar"] .katex-display {
 .param-symbol sup {
     color: #f2f2f9 !important;
     font-weight: 700 !important;
+    font-size: 1.05rem !important;
     font-family: 'Plus Jakarta Sans', sans-serif !important;
 }
 .param-unit {
-    color: #8888b0 !important;
-    font-weight: 400 !important;
-    font-size: 0.85em;
+    color: #f2f2f9 !important;
+    font-weight: 700 !important;
+    font-size: 1.05rem !important;
 }
 
 /* ── Run button ── */

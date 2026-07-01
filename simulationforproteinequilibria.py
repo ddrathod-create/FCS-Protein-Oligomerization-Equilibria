@@ -1,5 +1,12 @@
 # -*- coding: utf-8 -*-
 """
+Created on Wed Jul  1 16:04:31 2026
+
+@author: Dhanashri
+"""
+
+# -*- coding: utf-8 -*-
+"""
 Created on Wed Jun 10 11:27:19 2026
 """
 import numpy as np
@@ -7,19 +14,10 @@ import streamlit as st
 import matplotlib.pyplot as plt
 import matplotlib.ticker as ticker
 import pandas as pd
-import base64
-from pathlib import Path
-
-def _load_icon_b64(filename: str) -> str | None:
-    """Load an image next to this script and return it as a base64 data URI, or None if missing."""
-    path = Path(__file__).parent / filename
-    if not path.exists():
-        return None
-    return base64.b64encode(path.read_bytes()).decode()
 
 st.set_page_config(
     page_title="FCS-Protein Oligomerization Simulator",
-    page_icon="🔬",
+    page_icon="confocal-vol.png",
     layout="wide",
 )
 
@@ -398,13 +396,6 @@ div.stButton > button:active { background-color: #9900aa !important; }
     margin-right: 0.5rem;
     vertical-align: middle;
 }
-.page-icon-img {
-    height: 2.2rem;
-    width: auto;
-    margin-right: 0.5rem;
-    vertical-align: middle;
-    border-radius: 6px;
-}
 .page-title {
     font-family: 'Plus Jakarta Sans', sans-serif;
     font-size: 2rem;
@@ -715,15 +706,8 @@ with st.sidebar:
 
 
 # ── Main area ─────────────────────────────────────────────────────────────────────
-_icon_b64 = _load_icon_b64("confocal-vol.png")
-_icon_html = (
-    f"<img src='data:image/png;base64,{_icon_b64}' class='page-icon-img'>"
-    if _icon_b64 else "<span class='page-icon'>🔬</span>"
-)
-
 st.markdown(
     "<div class='page-header'>"
-    f"{_icon_html}"
     "<span class='page-title'>FCS-Protein Oligomerization Simulator</span>"
     "<div class='page-subtitle'>FCS-based simulation of oligomer equilibria</div>"
     "</div>",

@@ -18,7 +18,7 @@ This tool is based on a rigorous mathematical treatment that establishes analyti
 
 ## Original Code
 
-This webapp is based on the `proteinequilibriafn.py` file, maintaining all the original functionality while adding an interactive web interface using Streamlit.
+This webapp is based on the `fcs-protein-equilibria-fn.py` file, maintaining all the original functionality while adding an interactive web interface using Streamlit.
 
 ---
 

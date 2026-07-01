@@ -9,7 +9,7 @@ import matplotlib.ticker as ticker
 import pandas as pd
 
 st.set_page_config(
-    page_title="Protein Oligomerization Simulator",
+    page_title="FCS-Protein Oligomerization Simulator",
     page_icon="🔬",
     layout="wide",
 )
@@ -268,6 +268,29 @@ li[role="option"][aria-selected="true"] {
     color: #e040fb;
 }
 
+/* ── Inline equations (KaTeX) in sidebar ── */
+section[data-testid="stSidebar"] .katex,
+section[data-testid="stSidebar"] .katex * {
+    color: #d9a0f0 !important;
+}
+section[data-testid="stSidebar"] .katex {
+    font-size: 0.95rem !important;
+}
+section[data-testid="stSidebar"] .katex-display {
+    margin: 0 0 6px 0 !important;
+    text-align: left !important;
+    padding-left: 2px;
+}
+.eq-caption {
+    font-size: 0.78rem !important;
+    font-weight: 400 !important;
+    color: #6c6c94 !important;
+    font-style: italic;
+    display: block;
+    margin: -2px 0 8px 2px !important;
+    font-family: 'Plus Jakarta Sans', sans-serif !important;
+}
+
 /* ── Run button ── */
 div.stButton > button {
     width: 100%;
@@ -465,7 +488,7 @@ def make_figure(C, tau, species, model):
         ax_tau.plot(C, tau, color="#e040fb", linewidth=2.2, solid_capstyle="round")
         ax_tau.set_xscale("log")
         ax_tau.set_xlim(C[0], C[-1])
-        ax_tau.set_xlabel("Protein Concentration (nM)", color="#ccccdd", fontsize=9, labelpad=4)
+        ax_tau.set_xlabel("Total protein Concentration (nM)", color="#ccccdd", fontsize=9, labelpad=4)
         ax_tau.tick_params(axis="x", colors="#ccccdd", labelsize=8)
         ax_tau.xaxis.set_major_formatter(ticker.FuncFormatter(lambda v, _: f"{v:g}"))
         tau_subscript = {2: "2", 3: "3", 4: "4"}.get(n, "D")
@@ -515,14 +538,6 @@ EQ_LABELS = {
     "Tetramer": "Tetramer ⇌ Dimer ⇌ Monomer",
 }
 
-def label_row(text, tooltip):
-    return (
-        f"<div class='label-row'>"
-        f"<span class='sidebar-input-label'>{text}</span>"
-        f"<span class='help-icon' title='{tooltip}'>?</span>"
-        f"</div>"
-    )
-
 with st.sidebar:
     run_btn = st.button("▶  Run Simulation", use_container_width=True)
     st.divider()
@@ -540,43 +555,49 @@ with st.sidebar:
     st.divider()
     st.markdown("<span class='sidebar-label'>MODEL PARAMETERS</span>", unsafe_allow_html=True)
 
+    unit_word = {"Dimer": "dimers", "Trimer": "trimers", "Tetramer": "tetramers"}[model]
+
     if model == "Tetramer":
-        st.markdown(label_row("K<sub>d1</sub> (nM)", "Dissociation constant for the dimer ⇌ tetramer step (nM)."), unsafe_allow_html=True)
+        st.markdown("<span class='sidebar-input-label'>K<sub>d1</sub> (nM)</span>", unsafe_allow_html=True)
+        st.latex(r"T_4 \rightleftharpoons 2D")
+        st.latex(r"K_{d1} = \dfrac{[D]^2}{[T_4]}")
         KD1 = st.number_input("Kd1", label_visibility="collapsed",
                                min_value=1e-6, max_value=1e9, value=100.0, step=10.0, format="%.4g")
-        st.markdown(label_row("K<sub>d2</sub> (nM)", "Dissociation constant for the monomer ⇌ dimer step (nM)."), unsafe_allow_html=True)
+
+        st.markdown("<span class='sidebar-input-label'>K<sub>d2</sub> (nM)</span>", unsafe_allow_html=True)
+        st.latex(r"D \rightleftharpoons 2M")
+        st.latex(r"K_{d2} = \dfrac{[M]^2}{[D]}")
         KD2 = st.number_input("Kd2", label_visibility="collapsed",
                                min_value=1e-6, max_value=1e9, value=10.0, step=10.0, format="%.4g")
     elif model == "Trimer":
-        st.markdown(label_row(
-            "K<sub>d</sub><sup>E</sup> (nM)",
-            "Effective dissociation constant for the trimer ⇌ monomer equilibrium (nM). "
-            "Kd\u1d31 = (2/\u221a3) \u00d7 \u221aKd"
-        ), unsafe_allow_html=True)
+        st.markdown("<span class='sidebar-input-label'>K<sub>d</sub><sup>E</sup> (nM)</span>", unsafe_allow_html=True)
+        st.latex(r"T_3 \rightleftharpoons 3M")
+        st.latex(r"K_d = \dfrac{[M]^3}{[T_3]}")
+        st.latex(r"K_d^{E} = \dfrac{2}{\sqrt{3}}\sqrt{K_d}")
         KD1 = st.number_input("Kd", label_visibility="collapsed",
                                min_value=1e-6, max_value=1e9, value=100.0, step=10.0, format="%.4g")
         KD2 = None
     else:
-        st.markdown(label_row("K<sub>d</sub> (nM)", "Dissociation constant for the monomer ⇌ oligomer equilibrium (nM)."), unsafe_allow_html=True)
+        st.markdown("<span class='sidebar-input-label'>K<sub>d</sub> (nM)</span>", unsafe_allow_html=True)
+        st.latex(r"D \rightleftharpoons 2M")
+        st.latex(r"K_d = \dfrac{[M]^2}{[D]}")
         KD1 = st.number_input("Kd", label_visibility="collapsed",
                                min_value=1e-6, max_value=1e9, value=100.0, step=10.0, format="%.4g")
         KD2 = None
 
-    st.markdown(label_row("f", "Labelling efficiency (0–1): fraction of protein molecules carrying a fluorescent label."), unsafe_allow_html=True)
+    st.markdown("<span class='sidebar-input-label'>f</span>", unsafe_allow_html=True)
+    st.markdown("<span class='eq-caption'>labeling efficiency</span>", unsafe_allow_html=True)
     f = st.number_input("f", label_visibility="collapsed",
                         min_value=0.0, max_value=1.0, value=0.5, step=0.05, format="%.2f")
-    st.markdown(label_row("C<sub>L</sub> (nM)", "Concentration of labeled protein in terms of highest oligomer (nM)."), unsafe_allow_html=True)
+
+    st.markdown("<span class='sidebar-input-label'>C<sub>L</sub> (nM)</span>", unsafe_allow_html=True)
+    st.markdown(f"<span class='eq-caption'>labeled protein concentration (as {unit_word})</span>", unsafe_allow_html=True)
     C_l = st.number_input("CL", label_visibility="collapsed",
                            min_value=0.0, max_value=1e6, value=1.0, step=0.1, format="%.4g")
 
     st.divider()
-    st.markdown(
-        "<div class='label-row'>"
-        "<span class='sidebar-label' style='margin-bottom:0;'>CONC. RANGE (nM)</span>"
-        "<span class='help-icon' title='Range of total protein concentration to simulate (nM) in terms of highest oligomer, shown on the log-scale x-axis of the plots.'>?</span>"
-        "</div>",
-        unsafe_allow_html=True,
-    )
+    st.markdown("<span class='sidebar-label' style='margin-bottom:0;'>CONC. RANGE (nM)</span>", unsafe_allow_html=True)
+    st.markdown(f"<span class='eq-caption' style='margin-top:2px;'>total protein concentration range (as {unit_word})</span>", unsafe_allow_html=True)
     col_lo, col_hi = st.columns(2)
     with col_lo:
         st.markdown("<span class='sidebar-input-label'>Min</span>", unsafe_allow_html=True)

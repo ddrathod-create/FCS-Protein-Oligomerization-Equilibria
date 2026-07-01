@@ -131,7 +131,7 @@ section[data-testid="stSidebar"] *:not(span) {
     color: #e0e0e0 !important;
     font-family: 'Plus Jakarta Sans', sans-serif !important;
 }
-section[data-testid="stSidebar"] span {
+section[data-testid="stSidebar"] span:not(.katex):not(.katex *) {
     font-family: 'Plus Jakarta Sans', sans-serif !important;
 }
 section[data-testid="stSidebar"] hr {

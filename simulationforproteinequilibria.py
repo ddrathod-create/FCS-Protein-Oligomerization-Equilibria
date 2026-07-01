@@ -271,20 +271,24 @@ li[role="option"][aria-selected="true"] {
 /* ── Inline equations (KaTeX) in sidebar ── */
 section[data-testid="stSidebar"] .katex,
 section[data-testid="stSidebar"] .katex * {
-    color: #d9a0f0 !important;
+    color: #e0c3fa !important;
 }
 section[data-testid="stSidebar"] .katex {
-    font-size: 0.95rem !important;
+    font-size: 1.15rem !important;
 }
 section[data-testid="stSidebar"] .katex-display {
-    margin: 0 0 6px 0 !important;
+    margin: 2px 0 12px 0 !important;
     text-align: left !important;
-    padding-left: 2px;
+    background: #1c1c33;
+    border: 1px solid #33335a;
+    border-radius: 8px;
+    padding: 8px 12px !important;
+    overflow-x: auto;
 }
 .eq-caption {
-    font-size: 0.78rem !important;
+    font-size: 0.92rem !important;
     font-weight: 400 !important;
-    color: #6c6c94 !important;
+    color: #9494c0 !important;
     font-style: italic;
     display: block;
     margin: -2px 0 8px 2px !important;
@@ -552,37 +556,42 @@ with st.sidebar:
     model_label = st.selectbox("model", list(EQ_LABELS.values()), label_visibility="collapsed")
     model = [k for k, v in EQ_LABELS.items() if v == model_label][0]
 
+    if model == "Dimer":
+        st.latex(r"D \rightleftharpoons 2M")
+    elif model == "Trimer":
+        st.latex(r"T_3 \rightleftharpoons 3M")
+    else:
+        st.latex(r"T_4 \rightleftharpoons 2D \rightleftharpoons 4M")
+
     st.divider()
     st.markdown("<span class='sidebar-label'>MODEL PARAMETERS</span>", unsafe_allow_html=True)
 
+    n_map = {"Dimer": 2, "Trimer": 3, "Tetramer": 4}
+    n = n_map[model]
     unit_word = {"Dimer": "dimers", "Trimer": "trimers", "Tetramer": "tetramers"}[model]
 
     if model == "Tetramer":
         st.markdown("<span class='sidebar-input-label'>K<sub>d1</sub> (nM)</span>", unsafe_allow_html=True)
-        st.latex(r"T_4 \rightleftharpoons 2D")
-        st.latex(r"K_{d1} = \dfrac{[D]^2}{[T_4]}")
         KD1 = st.number_input("Kd1", label_visibility="collapsed",
                                min_value=1e-6, max_value=1e9, value=100.0, step=10.0, format="%.4g")
+        st.latex(r"K_{d1} = \dfrac{[D]^2}{[T_4]}")
 
         st.markdown("<span class='sidebar-input-label'>K<sub>d2</sub> (nM)</span>", unsafe_allow_html=True)
-        st.latex(r"D \rightleftharpoons 2M")
-        st.latex(r"K_{d2} = \dfrac{[M]^2}{[D]}")
         KD2 = st.number_input("Kd2", label_visibility="collapsed",
                                min_value=1e-6, max_value=1e9, value=10.0, step=10.0, format="%.4g")
+        st.latex(r"K_{d2} = \dfrac{[M]^2}{[D]}")
     elif model == "Trimer":
         st.markdown("<span class='sidebar-input-label'>K<sub>d</sub><sup>E</sup> (nM)</span>", unsafe_allow_html=True)
-        st.latex(r"T_3 \rightleftharpoons 3M")
-        st.latex(r"K_d = \dfrac{[M]^3}{[T_3]}")
-        st.latex(r"K_d^{E} = \dfrac{2}{\sqrt{3}}\sqrt{K_d}")
         KD1 = st.number_input("Kd", label_visibility="collapsed",
                                min_value=1e-6, max_value=1e9, value=100.0, step=10.0, format="%.4g")
+        st.latex(r"K_d = \dfrac{[M]^3}{[T_3]}")
+        st.latex(r"K_d^{E} = \dfrac{2}{\sqrt{3}}\sqrt{K_d}")
         KD2 = None
     else:
         st.markdown("<span class='sidebar-input-label'>K<sub>d</sub> (nM)</span>", unsafe_allow_html=True)
-        st.latex(r"D \rightleftharpoons 2M")
-        st.latex(r"K_d = \dfrac{[M]^2}{[D]}")
         KD1 = st.number_input("Kd", label_visibility="collapsed",
                                min_value=1e-6, max_value=1e9, value=100.0, step=10.0, format="%.4g")
+        st.latex(r"K_d = \dfrac{[M]^2}{[D]}")
         KD2 = None
 
     st.markdown("<span class='sidebar-input-label'>f</span>", unsafe_allow_html=True)
@@ -590,10 +599,11 @@ with st.sidebar:
     f = st.number_input("f", label_visibility="collapsed",
                         min_value=0.0, max_value=1.0, value=0.5, step=0.05, format="%.2f")
 
-    st.markdown("<span class='sidebar-input-label'>C<sub>L</sub> (nM)</span>", unsafe_allow_html=True)
+    st.markdown("<span class='sidebar-input-label'>Ĉ<sub>L</sub> (nM)</span>", unsafe_allow_html=True)
     st.markdown(f"<span class='eq-caption'>labeled protein concentration (as {unit_word})</span>", unsafe_allow_html=True)
     C_l = st.number_input("CL", label_visibility="collapsed",
                            min_value=0.0, max_value=1e6, value=1.0, step=0.1, format="%.4g")
+    st.latex(rf"\hat{{C}}_L = {n}\,C_L")
 
     st.divider()
     st.markdown("<span class='sidebar-label' style='margin-bottom:0;'>CONC. RANGE (nM)</span>", unsafe_allow_html=True)

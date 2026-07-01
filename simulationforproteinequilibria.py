@@ -437,7 +437,8 @@ def dimer_equilibria(C2, KD, f, C_l):
     r2 = 0.79
     alpha1 = (1 / (C * 4)) * (-KD + np.sqrt(8 * C * KD + KD**2))
     alpha2 = 1 - alpha1
-    lf    = (2 * C_l * f) / C
+    Cl = 2 * C_l
+    lf    = (Cl * f) / C
     c = 1 - 2 * (alpha1 / (1 + (1 - alpha1) * lf))
     tau_app = 0.5 * (c * (1 - r2) + np.sqrt(c**2 * (1 - r2)**2 + 4 * r2))
     return tau_app, alpha1, alpha2, np.zeros_like(alpha1), np.zeros_like(alpha1)
@@ -451,7 +452,8 @@ def trimer_equilibria(C3, KDE, f, C_l):
     f2 = (a1**(1/3)) / (2**(1/3) * C**2)
     alpha1 = (1/3) * (-f1 + f2)
     alpha3 = 1 - alpha1
-    lf    = (3 * C_l * f) / C
+    Cl = 3 * C_l
+    lf    = (Cl * f) / C
     c = 1 - 2 * (alpha1 / (1 + (1 - alpha1) * (2 * lf)))
     tau_app = 0.5 * (c * (1 - r3) + np.sqrt(c**2 * (1 - r3)**2 + 4 * r3))
     return tau_app, alpha1, np.zeros_like(alpha1), alpha3, np.zeros_like(alpha1)
@@ -471,7 +473,8 @@ def tetramer_equilibria(C4, KD1, KD2, f, C_l):
     alpha1 = c1      / C
     alpha2 = 2 * c2  / C
     alpha4 = 4 * c4  / C
-    lf    = (4 * C_l * f) / C
+    Cl = 4 * C_l
+    lf    = (Cl * f) / C
     denom = 1 + alpha2 * lf + alpha4 * 3 * lf
     a1 = alpha1                  / denom
     a2 = alpha2 * (1 +     lf)  / denom

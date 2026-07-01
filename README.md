@@ -1,4 +1,4 @@
-# 🔬 Protein Oligomerization Simulator
+# FCS-Protein Oligomerization Simulator
 
 An interactive web tool for simulating fluorescence correlation spectroscopy (FCS) titration curves for three oligomerization equilibria: dimer-monomer, trimer-monomer, and tetramer-dimer-monomer.
 

@@ -274,7 +274,7 @@ section[data-testid="stSidebar"] .katex * {
     color: #e0c3fa !important;
 }
 section[data-testid="stSidebar"] .katex {
-    font-size: 1.35rem !important;
+    font-size: 1.15rem !important;
 }
 section[data-testid="stSidebar"] .katex-display {
     margin: 8px 0 14px 0 !important;
@@ -299,13 +299,13 @@ section[data-testid="stSidebar"] .element-container:has(> .stMarkdown .katex-dis
 .param-symbol sub,
 .param-symbol sup {
     color: #f2f2f9 !important;
-    font-weight: 700 !important;
+    font-weight: 400 !important;
     font-size: 1.05rem !important;
     font-family: 'Plus Jakarta Sans', sans-serif !important;
 }
 .param-unit {
     color: #f2f2f9 !important;
-    font-weight: 700 !important;
+    font-weight: 400 !important;
     font-size: 1.05rem !important;
 }
 

@@ -630,7 +630,7 @@ with st.sidebar:
             "<span class='sidebar-input-label'>"
             "<span class='param-symbol'>K<sub>d</sub><sup>E</sup></span> <span class='param-unit'>(nM)</span>"
             "</span>"
-            "<span class='eq-caption'>effective dissociation constant, trimer ⇌ monomer equilibrium</span>"
+            "<span class='eq-caption'>(effective dissociation constant)</span>"
             "</div>", unsafe_allow_html=True)
         KD1 = st.number_input("Kd", label_visibility="collapsed",
                                min_value=1e-6, max_value=1e9, value=100.0, step=10.0, format="%.4g")
@@ -643,7 +643,7 @@ with st.sidebar:
             "<span class='sidebar-input-label'>"
             "<span class='param-symbol'>K<sub>d</sub></span> <span class='param-unit'>(nM)</span>"
             "</span>"
-            "<span class='eq-caption'>equilibrium dissociation constant</span>"
+            "<span class='eq-caption'>(equilibrium dissociation constant)</span>"
             "</div>", unsafe_allow_html=True)
         KD1 = st.number_input("Kd", label_visibility="collapsed",
                                min_value=1e-6, max_value=1e9, value=100.0, step=10.0, format="%.4g")
@@ -672,7 +672,7 @@ with st.sidebar:
 
     st.divider()
     st.markdown("<span class='sidebar-label' style='margin-bottom:0;'>CONC. RANGE (nM)</span>", unsafe_allow_html=True)
-    st.markdown(f"<span class='eq-caption' style='margin-top:2px;'>total protein concentration range (as {unit_word})</span>", unsafe_allow_html=True)
+    st.markdown(f"<span class='eq-caption' style='margin-top:0px;'>(total protein concentration range as {unit_word})</span>", unsafe_allow_html=True)
     col_lo, col_hi = st.columns(2)
     with col_lo:
         st.markdown("<span class='sidebar-input-label'>Min</span>", unsafe_allow_html=True)

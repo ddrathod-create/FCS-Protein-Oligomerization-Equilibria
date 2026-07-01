@@ -1,14 +1,3 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Wed Jul  1 16:04:31 2026
-
-@author: Dhanashri
-"""
-
-# -*- coding: utf-8 -*-
-"""
-Created on Wed Jun 10 11:27:19 2026
-"""
 import numpy as np
 import streamlit as st
 import matplotlib.pyplot as plt

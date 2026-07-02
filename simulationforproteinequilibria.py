@@ -459,13 +459,13 @@ p, label, div, h1, h2, h3, h4, h5, h6,
 </style>
 """, unsafe_allow_html=True)
 
-# ── Floating GitHub link (independent overlay, doesn't touch existing header CSS) ──
+# ── Floating GitHub link  ──
 st.markdown("""
 <style>
 .custom-github-link {
     position: fixed;
     top: 14px;
-    right: 210px;   /* nudge this so it sits where you want relative to Share/star/pencil/menu */
+    right: 180px;   
     z-index: 999999;
     display: flex;
     align-items: center;

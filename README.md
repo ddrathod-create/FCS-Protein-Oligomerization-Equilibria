@@ -100,13 +100,12 @@ The app will open automatically in your browser at `http://localhost:8501`.
    by fluorescence correlation spectroscopy: A mathematical treatment.
    *The Journal of Physical Chemistry B*, 118(43), 12404–12415. https://doi.org/10.1021/jp507741r
 
-2. **[Author(s), Title, Journal, Year, DOI: placeholder]**
 
 ---
 
 ## Citation
 
-If you use this tool in your work, please cite reference [2] above.
+If you use this tool in your work, please cite above.
 
 ---
 

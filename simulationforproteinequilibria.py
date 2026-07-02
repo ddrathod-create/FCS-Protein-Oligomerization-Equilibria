@@ -422,7 +422,7 @@ div.stButton > button:active { background-color: #9900aa !important; }
 
 /* ── Main-area equation title (rendered via st.latex, matches sidebar KaTeX styling) ── */
 .block-container .katex-display {
-    font-size: 1.8rem !important;
+    font-size: 1.4rem !important;
     margin: 0.5rem 0 1.2rem 0 !important;
     padding-bottom: 0.4rem !important;
     border-bottom: 1px solid #2a2a3e !important;

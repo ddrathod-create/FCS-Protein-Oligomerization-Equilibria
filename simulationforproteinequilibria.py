@@ -278,15 +278,19 @@ section[data-testid="stSidebar"] .katex-display {
     text-align: left !important;
     overflow-y: visible !important;
     overflow-x: auto !important;
-    padding-top: 4px !important;
+    padding-top: 8px !important;
 }
-section[data-testid="stSidebar"] .katex-display > .katex,
-section[data-testid="stSidebar"] .katex-display > .katex > .katex-html {
+/* Force overflow visible on every nested KaTeX span so tall elements
+   (exponents, radicals, fraction numerators) never get clipped */
+section[data-testid="stSidebar"] .katex-display,
+section[data-testid="stSidebar"] .katex-display *,
+section[data-testid="stSidebar"] .katex,
+section[data-testid="stSidebar"] .katex * {
     overflow: visible !important;
 }
 
 section[data-testid="stSidebar"] .element-container:has(> .stMarkdown .katex-display) + .element-container:has(> .stMarkdown .katex-display) {
-    margin-top: -10px !important;
+    margin-top: -6px !important;
 }
 .eq-caption {
     font-size: 0.92rem !important;
@@ -585,6 +589,11 @@ EQ_LABELS = {
     "Trimer":   "Trimer ⇌ Monomer",
     "Tetramer": "Tetramer ⇌ Dimer ⇌ Monomer",
 }
+EQ_SYMBOLS = {
+    "Dimer":    "D ⇌ 2M",
+    "Trimer":   "T\u2083 ⇌ 3M",
+    "Tetramer": "T\u2084 ⇌ 2D ⇌ 4M",
+}
 
 with st.sidebar:
     run_btn = st.button("▶  Run Simulation", use_container_width=True)
@@ -739,7 +748,7 @@ if st.session_state["last_result"] is None or model_changed or run_btn:
 res = st.session_state["last_result"]
 C, tau, species, model_used = res["C"], res["tau"], res["species"], res["model"]
 
-st.markdown(f"<div class='section-heading'>{EQ_LABELS[model_used]}</div>", unsafe_allow_html=True)
+st.markdown(f"<div class='section-heading'>{EQ_SYMBOLS[model_used]}</div>", unsafe_allow_html=True)
 
 fig = make_figure(C, tau, species, model_used)
 st.pyplot(fig, use_container_width=True)

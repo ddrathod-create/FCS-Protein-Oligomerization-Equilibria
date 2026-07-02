@@ -52,15 +52,15 @@ $$
 
 | Parameter | Description |
 |-----------|-------------|
-| $K_d$ | Dissociation constant for the monomer–oligomer equilibrium (nM); for the trimer case this is an effective $K_d$ in nM units, reported as $K_d^{E}$ |
+| $K_d$ | Dissociation constant for the monomer–oligomer equilibrium (nM); for the trimer case this is $K_d^{E}$ in nM units |
 | $K_{d1}$ | Dissociation constant for the tetramer ($T_4$)-dimer ($D$) step (nM) |
 | $K_{d2}$ | Dissociation constant for the dimer ($D$)-monomer ($M$) step (nM) |
-| $f$ | Labeling efficiency (fraction of molecules carrying a fluorescent label) |
-| $\tilde{C}_L$ | Concentration of labeled protein in terms of the highest oligomer (nM) |
-| Conc. range | Total protein concentration in terms of the highest oligomer range for the simulation (nM) |
+| $f$ | Labeling efficiency |
+| $\tilde{C}_L$ | Concentration of labeled protein expressed as the highest oligomer (nM) (dimer/trimer/tetramer) |
+| Conc. range | Total protein concentration expressed as the highest oligomer range for the simulation (nM) (dimer/trimer/tetramer) |
 
 The tool outputs:
-- **Upper panel:** τₐₚₚ / τₘ vs. protein concentration (log scale), with a secondary *x*-axis showing total monomer concentration
+- **Upper panel:** τₐₚₚ / τₘ vs. total protein concentration (log scale), with a secondary *x*-axis showing total monomer concentration
 - **Lower panel:** Fractional species concentrations vs. protein concentration
 - **CSV download:** All plotted values in a .csv file 
 

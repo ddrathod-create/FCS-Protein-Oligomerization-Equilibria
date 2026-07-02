@@ -420,6 +420,18 @@ div.stButton > button:active { background-color: #9900aa !important; }
     text-align: center;
 }
 
+/* ── Main-area equation title (rendered via st.latex, matches sidebar KaTeX styling) ── */
+.block-container .katex-display {
+    font-size: 1.8rem !important;
+    margin: 0.5rem 0 1.2rem 0 !important;
+    padding-bottom: 0.4rem !important;
+    border-bottom: 1px solid #2a2a3e !important;
+}
+.block-container .katex-display .katex,
+.block-container .katex-display .katex * {
+    color: #e0c3fa !important;
+}
+
 /* ── All text in main area ── */
 p, label, div, h1, h2, h3, h4, h5, h6,
 .stMarkdown, [data-testid="stMarkdownContainer"] {
@@ -590,9 +602,9 @@ EQ_LABELS = {
     "Tetramer": "Tetramer ⇌ Dimer ⇌ Monomer",
 }
 EQ_SYMBOLS = {
-    "Dimer":    "D ⇌ 2M",
-    "Trimer":   "T\u2083 ⇌ 3M",
-    "Tetramer": "T\u2084 ⇌ 2D ⇌ 4M",
+    "Dimer":    r"D \rightleftharpoons 2M",
+    "Trimer":   r"T_3 \rightleftharpoons 3M",
+    "Tetramer": r"T_4 \rightleftharpoons 2D \rightleftharpoons 4M",
 }
 
 with st.sidebar:
@@ -749,7 +761,7 @@ if st.session_state["last_result"] is None or model_changed or run_btn:
 res = st.session_state["last_result"]
 C, tau, species, model_used = res["C"], res["tau"], res["species"], res["model"]
 
-st.markdown(f"<div class='section-heading'>{EQ_SYMBOLS[model_used]}</div>", unsafe_allow_html=True)
+st.latex(EQ_SYMBOLS[model_used])
 
 fig = make_figure(C, tau, species, model_used)
 st.pyplot(fig, use_container_width=True)

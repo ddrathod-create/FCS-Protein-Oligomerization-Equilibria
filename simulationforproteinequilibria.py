@@ -614,7 +614,8 @@ with st.sidebar:
     elif model == "Trimer":
         st.latex(r"T_3 \rightleftharpoons 3M")
     else:
-        st.latex(r"T_4 \rightleftharpoons 2D \rightleftharpoons 4M")
+        st.latex(r"T_4 \rightleftharpoons 2D")
+        st.latex(r"D \rightleftharpoons 2M")
 
     st.divider()
     st.markdown("<span class='sidebar-label'>MODEL PARAMETERS</span>", unsafe_allow_html=True)

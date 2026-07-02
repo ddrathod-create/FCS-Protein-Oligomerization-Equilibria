@@ -280,12 +280,25 @@ section[data-testid="stSidebar"] .katex-display {
     overflow-x: auto !important;
     padding-top: 8px !important;
 }
-/* Force overflow visible on every nested KaTeX span so tall elements
-   (exponents, radicals, fraction numerators) never get clipped */
+/* Keep the *containers* around each equation from clipping tall glyphs
+   (exponents, fraction numerators) — but stop at .katex-display/.katex
+   themselves. We deliberately do NOT cascade overflow:visible into every
+   descendant (".katex *"): KaTeX relies on overflow:hidden internally
+   (e.g. the ".hide-tail" span used to size the stretchy sqrt/radical bar)
+   to clip its radical glyph down to the correct width. Forcing that to
+   visible makes sqrt() bars render far wider than intended and bleed
+   into neighboring content (this was the cause of the stray horizontal
+   line cutting across the Kd^E equation). */
 section[data-testid="stSidebar"] .katex-display,
-section[data-testid="stSidebar"] .katex-display *,
-section[data-testid="stSidebar"] .katex,
-section[data-testid="stSidebar"] .katex * {
+section[data-testid="stSidebar"] .katex {
+    overflow: visible !important;
+}
+/* The Streamlit wrappers around each st.latex()/st.markdown() call can
+   also clip tall content — give those overflow:visible too. */
+section[data-testid="stSidebar"] .element-container,
+section[data-testid="stSidebar"] [data-testid="stElementContainer"],
+section[data-testid="stSidebar"] [data-testid="stMarkdownContainer"],
+section[data-testid="stSidebar"] .stMarkdown {
     overflow: visible !important;
 }
 

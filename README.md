@@ -103,12 +103,6 @@ The app will open automatically in your browser at `http://localhost:8501`.
 
 ---
 
-## Citation
-
-If you use this tool in your work, please cite above.
-
----
-
 ## License
 
 [MIT / GPLv3 / other: add your license here]

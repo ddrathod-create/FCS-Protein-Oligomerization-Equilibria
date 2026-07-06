@@ -609,7 +609,7 @@ def make_figure(C, tau, species, model):
         ax_tau.plot(C, tau, color="#e040fb", linewidth=2.2, solid_capstyle="round")
         ax_tau.set_xscale("log")
         ax_tau.set_xlim(C[0], C[-1])
-        ax_tau.set_xlabel("Total protein Concentration (nM)", color="#ccccdd", fontsize=9, labelpad=4)
+        ax_tau.set_xlabel("Total Protein Concentration (nM)", color="#ccccdd", fontsize=9, labelpad=4)
         ax_tau.tick_params(axis="x", colors="#ccccdd", labelsize=8)
         ax_tau.xaxis.set_major_formatter(ticker.FuncFormatter(lambda v, _: f"{v:g}"))
         tau_subscript = {2: "2", 3: "3", 4: "4"}.get(n, "D")
@@ -824,7 +824,7 @@ fig = make_figure(C, tau, species, model_used)
 st.pyplot(fig, use_container_width=True)
 plt.close(fig)
 
-df_data = {"Concentration (nM)": C, "tau_app": tau}
+df_data = {"Total Protein Concentration (nM)": C, "normalized tau_app": tau}
 df_data.update(species)
 df = pd.DataFrame(df_data)
 csv = df.to_csv(index=False).encode("utf-8")

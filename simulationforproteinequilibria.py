@@ -640,7 +640,7 @@ def make_figure(C, tau, species, model):
                          linewidth=2.0, label=name, solid_capstyle="round")
         ax_frac.set_xscale("log")
         ax_frac.set_xlim(C[0], C[-1])
-        ax_frac.set_xlabel("Protein Concentration (nM)", fontsize=9, labelpad=4, color="#ccccdd")
+        ax_frac.set_xlabel("Total Protein Concentration (nM)", fontsize=9, labelpad=4, color="#ccccdd")
         ax_frac.tick_params(axis="x", labelsize=8, colors="#ccccdd")
         ax_frac.tick_params(axis="y", labelsize=8, colors="#ccccdd")
         ax_frac.xaxis.set_major_formatter(ticker.FuncFormatter(lambda v, _: f"{v:g}"))

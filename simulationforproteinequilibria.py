@@ -332,7 +332,7 @@ section[data-testid="stSidebar"] .element-container:has(> .stMarkdown .katex-dis
     margin: 0 !important;
     display: inline;
 }
-/* ── Tighter gap for the CONC. RANGE header + caption ── */
+
 .section-tight-caption {
     margin-top: -2px !important;
     margin-bottom: 8px !important;

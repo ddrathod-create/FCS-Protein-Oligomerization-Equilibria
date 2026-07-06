@@ -766,15 +766,13 @@ with st.sidebar:
         "<span class='sidebar-label' style='margin-bottom:0;'>CONC. RANGE (nM)</span>"
         f"<span class='eq-caption section-tight-caption'>(total protein concentration range as {unit_word})</span>",
         unsafe_allow_html=True)
-    col_lo, col_hi = st.columns(2)
-    with col_lo:
-        st.markdown("<span class='sidebar-input-label'>Min</span>", unsafe_allow_html=True)
-        c_min = st.number_input("Min", label_visibility="collapsed",
-                                 min_value=1e-6, max_value=1e6, value=1.0, step=1.0, format="%.4g")
-    with col_hi:
-        st.markdown("<span class='sidebar-input-label'>Max</span>", unsafe_allow_html=True)
-        c_max = st.number_input("Max", label_visibility="collapsed",
-                                 min_value=1e-6, max_value=1e9, value=1000.0, step=100.0, format="%.4g")
+    st.markdown("<span class='sidebar-input-label'>Min</span>", unsafe_allow_html=True)
+    c_min = st.number_input("Min", label_visibility="collapsed",
+                         min_value=1e-6, max_value=1e6, value=1.0, step=1.0, format="%.4g")
+
+    st.markdown("<span class='sidebar-input-label'>Max</span>", unsafe_allow_html=True)
+    c_max = st.number_input("Max", label_visibility="collapsed",
+                         min_value=1e-6, max_value=1e9, value=1000.0, step=100.0, format="%.4g")
 
 
 # ── Main area ─────────────────────────────────────────────────────────────────────

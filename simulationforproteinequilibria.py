@@ -828,14 +828,16 @@ plt.close(fig)
 df_data = {"Total Protein Concentration (nM)": C, "normalized tau_app": tau}
 df_data.update(species)
 df = pd.DataFrame(df_data)
-species_cols = list(species.keys())          # e.g. ["Monomer", "Dimer", "Tetramer"]
+species_cols = list(species.keys())         
 n_species = len(species_cols)
-group_row  = ["", ""] + ["Fractional Concentrations"] + [""] * (n_species - 1)
-header_row = ["Total Protein Concentration (nM)", "normalized tau_app"] + species_cols
+df.insert(2, "", "")
+group_row  = ["", "", ""] + ["Fractional Concentrations"] + [""] * (n_species - 1)
+header_row = ["Concentration (nM)", "tau_app", ""] + species_cols
 buf = io.StringIO()
 buf.write(",".join(group_row) + "\n")
 buf.write(",".join(header_row) + "\n")
 df.to_csv(buf, index=False, header=False)
+csv = buf.getvalue().encode("utf-8")
 csv = buf.getvalue().encode("utf-8")
 st.download_button(
     label="Download CSV",

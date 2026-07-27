@@ -103,6 +103,4 @@ The app will open automatically in your browser at `http://localhost:8501`.
 
 ---
 
-## License
 
-[MIT / GPLv3 / other: add your license here]

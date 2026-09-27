@@ -96,7 +96,11 @@ The app will open automatically in your browser at `http://localhost:8501`.
 
 ## References
 
-1. Kanno, D. M., & Levitus, M. (2014). Protein oligomerization equilibria and kinetics investigated
+1. Rathod, D., Parrott, K. J., & Levitus, M. (2026). A practical framework for measuring protein oligomerization equilibria by
+   fluorescence correlation spectroscopy.
+   *Methods and Applications in Fluorescence*. Advance online publication. https://doi.org/10.1088/2050-6120/aeab94
+
+3. Kanno, D. M., & Levitus, M. (2014). Protein oligomerization equilibria and kinetics investigated
    by fluorescence correlation spectroscopy: A mathematical treatment.
    *The Journal of Physical Chemistry B*, 118(43), 12404–12415. https://doi.org/10.1021/jp507741r
 

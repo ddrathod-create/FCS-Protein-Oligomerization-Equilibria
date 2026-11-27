@@ -14,7 +14,8 @@ A key complication is that the autocorrelation decay of a mixture of oligomeric 
 
 This tool is based on a rigorous mathematical treatment that establishes analytical relationships between the experimentally measured τₐₚₚ values and the thermodynamic parameters governing protein oligomerization, including dissociation equilibrium constants for three different oligomerization cases: dimer-monomer, trimer-monomer, and tetramer-dimer-monomer [1]. It computes the predicted **normalized apparent diffusion time** τₙ = τₐₚₚ / τₘ as a function of total protein concentration, given user-specified dissociation constants ($K_d$) and experimental parameters, where τₘ is the diffusion time of the intact oligomeric species of stoichiometry m.
 
-**Use it online:**  https://protein-oligomerization-equilibria-fna67mqcnzwacp7iok5uvb.streamlit.app/ 
+**Use it online:** https://protein-oligomerization-equilibria-fna67mqcnzwacp7iok5uvb.streamlit.app/
+
 ---
 
 ## Original Code
